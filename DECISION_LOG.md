@@ -136,3 +136,12 @@ All decisions 2026-11-09 unless dated.
     returns 200 with a valid certificate. Outstanding founder actions: **Check again** in
     Settings → Pages (after the cache window), then **Enforce HTTPS**; then a live
     verification pass. Mailbox receipt/reply test remains the final human gate.
+
+32. **Two GitHub Actions parse traps found and fixed in the rewritten workflow.**
+    (a) An unquoted `&` in `name:` made every run fail before any job existed
+    ("workflow file issue", zero jobs). (b) Concurrency group `pages-${{ github.ref }}`
+    worked for `push` but failed identically for `pull_request`, because for PR events
+    `github.ref` is `refs/pull/N/merge` — not a usable concurrency group value. Fixed
+    with an event-aware group (`pages-pr-<number>` for PRs, `pages-<ref_name>` otherwise).
+    Verified green: push run 42674361866 (3m8s, structural+browser, deploy skipped) and
+    pull_request run 42675013448 (2m5s) on this branch.

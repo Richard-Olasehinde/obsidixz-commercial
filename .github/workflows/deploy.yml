@@ -28,8 +28,13 @@ permissions:
   contents: read
 
 concurrency:
-  # Single shared group: main deploys are serialized, push-check runs on branches queue normally.
-  group: pages
+  # Per-lane queue without ambiguous values:
+  #   push to main          -> pages-main         (deploys serialize; newest wins)
+  #   push to feature branch-> pages-<branch>     (slashes in branch names are fine for push)
+  #   pull_request          -> pages-pr-<number>  (github.ref = refs/pull/N/merge is NOT a
+  #                                                valid concurrency group; that value fails
+  #                                                the run before any job starts)
+  group: ${{ github.event_name == 'pull_request' && format('pages-pr-{0}', github.event.pull_request.number) || format('pages-{0}', github.ref_name) }}
   cancel-in-progress: true
 
 jobs:
