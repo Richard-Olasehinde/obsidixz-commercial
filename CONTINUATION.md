@@ -66,7 +66,7 @@ Services, How It Works, Contact (desktop+mobile). Viewport sizes and test build:
 
 1. Founder visual/brand review (copy + photography + lockup application) — adjust copy or
    crops as directed, re-run build/checks/screenshots, push.
-2. Deploy per `DEPLOYMENT.md` (hosting account + pp.ua DNS). Then post-deploy checklist.
+2. Deploy per `DEPLOYMENT.md` §0 (GitHub Pages: make repo public → Pages source = GitHub Actions → custom domain → pp.ua CNAME). Then post-deploy checklist. The integration token cannot perform these (HTTP 403) — they are founder actions.
 3. Send a real enquiry to `obsidixz.commercial@outlook.com`; confirm receipt and reply;
    record the outcome in `PROJECT_STATUS.md`.
 4. Optional: Search Console submission; staging noindex if a staging deploy exists.

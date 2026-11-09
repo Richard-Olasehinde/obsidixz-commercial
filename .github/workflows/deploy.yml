@@ -9,6 +9,9 @@ on:
     branches:
       - arena/5a9708cf-obsidixz-commercial
       - main
+    paths-ignore:
+      - '**/*.md'
+      - 'verification/**'
   workflow_dispatch:
 
 permissions:

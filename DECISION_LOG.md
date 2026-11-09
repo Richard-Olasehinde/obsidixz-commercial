@@ -41,3 +41,22 @@ All decisions 2026-11-09 unless dated.
 ## Deployment
 
 21. **No deploy performed.** No pp.ua DNS or hosting credentials were provided or are discoverable; `gh` is authenticated only for the repository. `DEPLOYMENT.md` gives exact steps (Cloudflare Pages recommended by precedent of the sibling `obsidixz-forms` Pages project, or any static host) plus staging-noindex guidance. Domain is NOT live/verified; do not claim otherwise.
+
+## Addendum — hosting decision (2026-11-09, second pass)
+
+22. **GitHub Pages chosen as the deployment path (supersedes decision 21's Cloudflare-first phrasing).**
+    Rationale: the only credential available in this workspace is the GitHub integration;
+    GitHub Pages deploys static output with zero extra secrets and supports the custom
+    domain with enforced HTTPS. Cloudflare Pages remains a valid alternative if the founder
+    prefers it, but requires a Cloudflare login this session does not have.
+23. **Deploy workflow committed but Pages activation is a human step.** The integration
+    token in this workspace receives HTTP 403 ("Resource not accessible by integration")
+    for repo-visibility changes and for all Pages administration (create/update site,
+    custom domain, HTTPS enforcement). The workflow file
+    (`.github/workflows/deploy.yml`) runs `check → build → verify → deploy` on pushes to
+    `arena/5a9708cf-obsidixz-commercial` (and future `main`). The founder must (a) make the
+    repo public (free-plan Pages requirement), (b) set Pages source to "GitHub Actions",
+    (c) enter the custom domain. Exact clicks and CLI equivalents are in `DEPLOYMENT.md`.
+24. **Deployment to `commercial.obsidixz.pp.ua` is not live until the founder completes
+    (a)–(c) and the pp.ua CNAME exists.** No claim of live status is made anywhere.
+

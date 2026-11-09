@@ -7,6 +7,64 @@ variables and no server code are required to serve the site.**
 > Status: **not deployed.** No pp.ua DNS or hosting credentials were available during the
 > build. Do not claim the domain is live until the checks in this file are done.
 
+## 0. GitHub Pages path (primary, chosen 2026-11-09)
+
+The build ships `.github/workflows/deploy.yml` (check → build → verify → deploy to Pages).
+Before the first green deploy, three one-time settings are required — all need an
+administrator of the repository (the sandbox integration token gets HTTP 403 for these):
+
+1. **Make the repository public** (free-plan Pages requirement)
+   - UI: repo → **Settings** → **General** → scroll to **Danger Zone** →
+     **Change repository visibility** → **Make public** → type
+     `Richard-Olasehinde/obsidixz-commercial` to confirm.
+   - CLI (your own authenticated token, not the integration):
+     `gh repo edit Richard-Olasehinde/obsidixz-commercial --visibility public`
+   - Public means the code, docs and commit history are world-readable; no secrets are
+     present in the tree (verified by scan) and `.gitignore` excludes env files.
+
+2. **Enable Pages from GitHub Actions**
+   - UI: repo → **Settings** → **Pages** → **Build and deployment** → **Source: GitHub Actions**
+     (leave the suggested workflow; the committed one is used).
+   - CLI equivalent: `gh api -X POST repos/Richard-Olasehinde/obsidixz-commercial/pages -f build_type=workflow`
+   - Then trigger a run: repo → **Actions** → “Deploy to GitHub Pages” → **Run workflow**
+     (or push any commit).
+
+3. **Point Pages at the custom domain**
+   - UI: repo → **Settings** → **Pages** → **Custom domain** → enter
+     `commercial.obsidixz.pp.ua` → **Save**.
+   - CLI equivalent: `gh api -X PUT repos/Richard-Olasehinde/obsidixz-commercial/pages -f cname=commercial.obsidixz.pp.ua`
+   - DNS check may warn until the CNAME below exists; afterwards tick **Enforce HTTPS**
+     (cert provisioning can take minutes to ~24h):
+     `gh api -X PUT repos/Richard-Olasehinde/obsidixz-commercial/pages -f https_enforced=true`
+
+### pp.ua DNS records (exact)
+
+At https://pp.ua → your domain **obsidixz.pp.ua** → DNS editor, create/replace exactly:
+
+| Type | Host / Name | Value / Points to | TTL |
+|---|---|---|---|
+| CNAME | `commercial` | `richard-olasehinde.github.io` | 3600 (or Auto) |
+
+- Some pp.ua panels want the FQDN in the Host field instead of the short name:
+  `commercial.obsidixz.pp.ua` → target `richard-olasehinde.github.io`
+- Delete any competing `A`/`AAAA`/`CNAME` on the `commercial` name first — one CNAME per
+  host, and it must not coexist with address records.
+- Do **not** touch apex (`obsidixz.pp.ua`) or the `realestate` name — the parent sites live there.
+- No MX/TXT changes are needed for Pages itself.
+- Verification (after save): `dig commercial.obsidixz.pp.ua CNAME +short` →
+  `richard-olasehinde.github.io.`
+- Then: `curl -sI https://commercial.obsidixz.pp.ua/` → `HTTP/2 200`.
+
+### After the domain resolves
+
+- Enforce HTTPS (above) and confirm the certificate is issued.
+- All eight routes + `/sitemap-index.xml` + `/robots.txt` → 200.
+- Submit the sitemap in Search Console / Bing Webmaster Tools (optional).
+- Record the outcome (date, URL, verification) in `PROJECT_STATUS.md`.
+- The 404 page is served by Pages automatically for unknown paths.
+
+---
+
 ## 1. Build locally (reproducible)
 
 ```bash
