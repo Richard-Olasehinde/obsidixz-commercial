@@ -11,7 +11,7 @@
 #
 # Prereqs (one-time, repo Settings): Pages → Source = "GitHub Actions",
 # custom domain commercial.obsidixz.pp.ua. Repo must be PUBLIC — see DEPLOYMENT.md §0.
-name: CI & Deploy
+name: CI and Deploy
 
 on:
   push:
