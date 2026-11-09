@@ -11,7 +11,7 @@
 ├─ CONTINUATION.md              # pick-up guide & recovery steps
 ├─ IMAGE_SOURCES.md             # image provenance & licences
 ├─ .gitignore                   # node_modules, dist, .astro, logs
-├─ package.json                 # scripts: dev/build/preview/check/verify
+├─ package.json                 # scripts: dev/build/preview/check/verify/test:render/test:render:all
 ├─ package-lock.json            # reproducible installs
 ├─ astro.config.mjs             # site=https://commercial.obsidixz.pp.ua, sitemap,
 │                               # server.allowedHosts via PREVIEW_ALLOWED_HOSTS
@@ -57,12 +57,16 @@
 │
 ├─ scripts/
 │  ├─ verify.mjs               # structural checks on dist/ (npm run verify)
-│  └─ rendered-checks.mjs      # rendered-browser sweep & interactions (see CONTINUATION.md)
+│  └─ rendered-checks.mjs      # rendered-browser sweep & interactions (check|interact|nojs|shots|all)
+│
+├─ .github/workflows/
+│  └─ deploy.yml               # structural + browser jobs; deploy gated to main
 │
 └─ verification/
    └─ screenshots/             # browser evidence PNGs (build served from dist/)
       ├─ home-desktop-header-hero-1440x900.png
       ├─ home-desktop-full-1440.png
+      ├─ home-lower-editorial-1440x900.png
       ├─ home-mobile-390x844.png
       ├─ mobile-menu-expanded-390x844.png
       ├─ services-desktop-1440x900.png

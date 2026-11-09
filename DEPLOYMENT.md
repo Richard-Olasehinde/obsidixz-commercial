@@ -4,10 +4,57 @@
 **Build output:** `dist/` (static HTML/CSS/JS + assets). **No secrets, no environment
 variables and no server code are required to serve the site.**
 
-> Status: **not deployed.** No pp.ua DNS or hosting credentials were available during the
-> build. Do not claim the domain is live until the checks in this file are done.
+> Status (2026-11-09, updated after PR #1 merge): **deployed to GitHub Pages over HTTP**
+> from `main` (founder confirmed the page renders; "Your site is live" in Pages). DNS is
+> correct at the source. **HTTPS is not yet valid** — certificate pending; see §0.1 for the
+> exact remaining founder actions. Do not claim HTTPS/padlock until a fetch of
+> `https://commercial.obsidixz.pp.ua/` returns 200 with a valid certificate.
 
-## 0. GitHub Pages path (primary, chosen 2026-11-09)
+## 0. GitHub Pages path (current decision — retained by the founder 2026-11-09)
+
+The build ships `.github/workflows/deploy.yml`. **Deploys happen only from `main`** —
+pushes to `main` and manual "Run workflow" selected on the `main` branch. Pushes and PRs
+from any other branch run the `structural` and `browser` checks but never deploy.
+
+Current state of the Pages site (checked via the Pages API on 2026-11-09):
+
+- Source: `build_type: workflow` · `source.branch: main`
+- Custom domain: `commercial.obsidixz.pp.ua` (saved and retained)
+- Domain protection/verification: `protected_domain_state: "verified"` (apex
+  `_github-pages-challenge-…` TXT already verifies the account — keep it)
+- Certificate: `https_certificate.state: "new"` (issuing) · `https_enforced: false`
+- HTTPS for the domain is **not yet working** — this is the only failing piece.
+- The "DNS check unsuccessful (InvalidDNSError)" banner is caused by **stale resolver
+  caches holding the pre-fix record** (`richard-olasehinde.github.io.obsidixz.pp.ua.`,
+  a relative expansion of a once-incomplete entry); the record at the source is correct
+  (trailing dot present — confirmed in the nic.ua panel and by repeated resolver reads).
+  A sampled shard still showed ~6 750 s TTL. This is self-healing; GitHub's own re-check
+  can pass before every cache expires.
+
+### 0.1 Finishing HTTPS (founder; ~2 minutes plus issuance wait)
+
+1. Wait until the stale answers expire (the sampled shard pointed at ~2026-11-09 15:30 UTC;
+   worst case 4 h from whenever the bad entry was cached) — or simply try now; the check is
+   idempotent.
+2. Repo → **Settings** → **Pages** → **Check again** (domain row).
+3. When the warning clears and the certificate shows issued (the banner reads "Resuming the
+   process" — it resumes automatically; there is no separate "request" button to click),
+   tick **Enforce HTTPS**.
+4. Verify (from anywhere, not just this sandbox):
+   - `curl -sI https://commercial.obsidixz.pp.ua/` → `HTTP/2 200`
+   - All 8 routes + `/sitemap-index.xml` + `/robots.txt` → 200
+   - Canonical/OG/sitemap URLs (they already point at `https://commercial.obsidixz.pp.ua/`)
+5. Record the outcome here and in `PROJECT_STATUS.md`.
+6. **If the check stays red after the cache window:** delete the `commercial` CNAME in
+   nic.ua and re-create the identical record (`commercial` / CNAME /
+   `richard-olasehinde.github.io.` / TTL 14400). This forces all uadns nodes to republish
+   (bumps SOA serial) and costs nothing. Then Check again. If it *still* fails, open a
+   nic.ua support ticket asking them to confirm all three nodes
+   (`ns10/11/12.uadns.com`) serve SOA `2026110904` (or newer) — a backend may be pinned to
+   a pre-fix zone version.
+7. Do **not** "fix" anything else in the zone (apex/realestate/wordquest/MX/TXT all work).
+
+## 0.2 Original activation (already completed — kept for the record)
 
 The build ships `.github/workflows/deploy.yml` (check → build → verify → deploy to Pages).
 Before the first green deploy, three one-time settings are required — all need an
@@ -26,8 +73,8 @@ administrator of the repository (the sandbox integration token gets HTTP 403 for
    - UI: repo → **Settings** → **Pages** → **Build and deployment** → **Source: GitHub Actions**
      (leave the suggested workflow; the committed one is used).
    - CLI equivalent: `gh api -X POST repos/Richard-Olasehinde/obsidixz-commercial/pages -f build_type=workflow`
-   - Then trigger a run: repo → **Actions** → “Deploy to GitHub Pages” → **Run workflow**
-     (or push any commit).
+   - Then trigger a run: repo → **Actions** → “CI & Deploy” → **Run workflow** (on `main`)
+     (or push any commit to `main`). Feature branches never deploy.
 
 3. **Point Pages at the custom domain**
    - UI: repo → **Settings** → **Pages** → **Custom domain** → enter
@@ -70,7 +117,7 @@ At https://pp.ua → your domain **obsidixz.pp.ua** → DNS editor, create/repla
 ```bash
 git clone https://github.com/Richard-Olasehinde/obsidixz-commercial.git
 cd obsidixz-commercial
-git checkout arena/5a9708cf-obsidixz-commercial   # or merge to main first
+git checkout main   # or the revision branch under review
 npm ci
 npm run build        # → dist/
 npm run preview      # serves dist/ on 0.0.0.0:4321
@@ -80,11 +127,11 @@ Node ≥22.12 (repo pins `astro@7.3.8`; 7.4.x needs Node ≥22.23.4).
 
 ## 2. Hosting options
 
-Any static host works. Recommended: **Cloudflare Pages** (the sibling Obsidixz
-`obsidixz-forms` project already runs on Pages, and `*.pp.ua` subdomains commonly CNAME
-to Pages; choosing it keeps one operational model). Alternatives: Netlify, Vercel static,
-GitHub Pages (then confirm custom-domain support for the pp.ua subdomain), or any object
-storage + CDN.
+Any static host works. **Current decision (founder, 2026-11-09): GitHub Pages is the
+host; do not migrate.** The Cloudflare Pages notes below are kept as a documented
+alternative only — they were the earlier recommendation, superseded by the founder's
+retention decision and are not an outstanding task. (Sibling `obsidixz-forms` project
+also runs on Pages; if migration is ever wanted, the reasoning is here.)
 
 ### Cloudflare Pages (recommended)
 
@@ -140,6 +187,6 @@ Comma-separated hosts only; never contains secrets. Not needed for production ho
 ## 5. External prerequisites (not in this workspace)
 
 - pp.ua account access for DNS (or the DNS host currently managing `obsidixz.pp.ua`)
-- A hosting account (Cloudflare Pages recommended) authorised for `commercial.obsidixz.pp.ua`
+- GitHub Pages enabled from `main` (done — retained decision) authored by the repository admin
 - Access to the `obsidixz.commercial@outlook.com` mailbox for the send/receipt test
-- No paid services are required by the site itself (free tiers suffice); nothing was purchased or provisioned during the build
+- No paid services are required by the site itself (GitHub Pages is free for public repos); nothing was purchased or provisioned during the build

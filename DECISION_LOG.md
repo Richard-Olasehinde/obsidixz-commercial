@@ -60,3 +60,79 @@ All decisions 2026-11-09 unless dated.
 24. **Deployment to `commercial.obsidixz.pp.ua` is not live until the founder completes
     (a)–(c) and the pp.ua CNAME exists.** No claim of live status is made anywhere.
 
+## Addendum — independent-review corrections (2026-11-09, third pass)
+
+25. **Terms corrected to the approved scope; invented provisions removed.** The broad
+    "no liability for reliance" exclusion in Terms §7 is gone — it was never approved and
+    the brief prohibited inventing liability clauses. What remains is factual: customers
+    make their own purchasing decisions; reports are public information at stated dates.
+    The blanket "Unless a separate written agreement says otherwise" qualifier in the
+    exclusions list is removed — written agreements cannot silently turn excluded services
+    (verification, inspection, testing, QA, purchasing authority, logistics, payment
+    protection) into offerings; §3 now says project terms set scope/deliverables/fee/
+    timeline and nothing more. The unapproved contractual redistribution ban is replaced
+    by practical guidance without a purported legal obligation. No IP/refund/payment/
+    jurisdiction/liability terms were invented.
+
+26. **Service copy corrected; no expansion implied.** Supplier Discovery/RFQ language now
+    states negotiation/orders/purchasing authority remain with the customer, full stop —
+    the "unless separately agreed in writing" expansion is removed. The unapproved
+    categorical commission/success-fee ban is replaced by a statement of the actual model
+    (fixed, written, tailored fee; purchases are between customer and supplier). The
+    "experimental price lists" / "invented prices" drafting residue (incl. metadata) is
+    gone. The "typically respond within a few working days" commitment is replaced by an
+    honest no-SLA statement (an individual-operated emerging service does not publish a
+    turnaround it cannot support). The unverifiable "no supplier equity" assertion is
+    replaced by the evidence-over-opinion principle. Nothing implies Commercial can
+    negotiate, purchase "on the customer's behalf by separate agreement".
+
+27. **Privacy notice rewritten to actual handling.** The "nothing beyond browser page
+    loading" sweep is gone; enquiry data (voluntarily emailed) is distinguished from the
+    static host's ordinary request logs. The named host is **GitHub Pages** (the selected,
+    founder-retained host) — not a hypothetical. Email flow described as it works: the
+    customer's provider, then Microsoft Outlook to the Commercial mailbox; the notice
+    states plainly that those providers' roles do not switch off Commercial's
+    responsibilities as mailbox operator (reading, using, storing, deleting). Unverified
+    claims about mailbox protection/configuration were removed; the invitation to send
+    credentials "later by a safer route" is removed — sensitive material is a separate
+    assessed, written matter, never a blanket credential channel. Retention remains the
+    24-month-closure / 12-month-review policy, framed as policy: deleting the mailbox copy
+    cannot recall the customer's sent copy or provider-side backups. No legal-compliance
+    certification is claimed; no other business's policy was copied.
+
+28. **Mobile menu: background isolation, not just aria-labels; plain semantics without JS.**
+    In the shipped markup the overlay carries no dialog semantics at all. The menu script
+    adds `role="dialog"`, `aria-modal="true"` and a label only while open, `inert` +
+    `aria-hidden` on everything else (`main`, `.site-header__inner`, `.site-footer`,
+    `.skip-link`), Escape/focus-trap, focus return on close, and breakpoint reset close.
+
+29. **Browser checks made reproducible and stricter.** `puppeteer-core` +
+    `@sparticuz/chromium` are now declared devDependencies (previously imported without
+    declaration). CI is split into named `structural` (astro check/build/verify) and
+    `browser` (apt-installed Chromium libraries; serves `dist/` via `astro preview`; runs
+    the rendered suite) jobs; `deploy` depends on both and is gated to
+    `github.ref == 'refs/heads/main'` (pushes and manual dispatch selected on main). This
+    supersedes the earlier `arena/…` push trigger. The harness now asserts `focusReturned`
+    on the Escape path (it was computed but unused), adds clipboard-denial and
+    legacy-fallback success tests, adds no-JavaScript checks (static nav, exact mailto
+    literal, no dialog semantics), treats an unmatched route as an expected 404 (document
+    404 is not counted as a failed asset), scroll-loads lazy images deterministically, and
+    labels the root-font-size simulation honestly (not "browser zoom").
+
+30. **Hosting retained as GitHub Pages — founder decision.** No migration to
+    Netlify/Vercel/Cloudflare; the Pages setup, static architecture and domain are kept.
+    For the record: this is a founder retention decision; GitHub has not "approved this
+    website", and the earlier hosting-policy concern referenced Pages' general public-repo
+    requirement, not a site-specific enforcement decision. If an actual provider notice or
+    technical restriction appears, it will be reported with precise evidence; nothing was
+    invented and nothing was hidden.
+
+31. **HTTPS/certificate is not yet verified — and the sandbox cannot verify it.** Pages
+    API: certificate `state: "new"`, `https_enforced: false`, domain `protected`/`verified`
+    (apex challenge TXT works), DNS CNAME correct at the source. A stale pre-fix
+    relative-expansion CNAME answer (`…github.io.obsidixz.pp.ua.`) persists in at least one
+    cache shard (sampled ~6750 s TTL remaining); some resolver lookups fail entirely.
+    HTTPS must not be called working until a fetch of `https://commercial.obsidixz.pp.ua/`
+    returns 200 with a valid certificate. Outstanding founder actions: **Check again** in
+    Settings → Pages (after the cache window), then **Enforce HTTPS**; then a live
+    verification pass. Mailbox receipt/reply test remains the final human gate.

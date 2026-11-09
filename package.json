@@ -9,7 +9,9 @@
     "build": "astro build",
     "preview": "astro preview --host 0.0.0.0",
     "check": "astro check",
-    "verify": "node scripts/verify.mjs"
+    "verify": "node scripts/verify.mjs",
+    "test:render": "node scripts/rendered-checks.mjs check",
+    "test:render:all": "node scripts/rendered-checks.mjs all"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",
@@ -19,7 +21,9 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.6",
+    "@sparticuz/chromium": "^153.0.0",
     "linkedom": "^0.18.12",
+    "puppeteer-core": "^25.16.0",
     "typescript": "^5.9.3"
   }
 }

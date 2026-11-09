@@ -43,8 +43,12 @@ const isActive = (href: string) =>
     </button>
   </div>
 
-  {/* Mobile navigation overlay */}
-  <div class="mnav on-dark" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Site menu">
+  {/* Mobile navigation overlay.
+      Rendered WITHOUT dialog semantics in markup: with JavaScript disabled this
+      renders as a static, always-visible navigation list (see the noscript rules in
+      BaseLayout). Dialog semantics (role="dialog", aria-modal) and background
+      isolation are added by the menu script only while the menu is actually open. */}
+  <div class="mnav on-dark" id="mobile-menu">
     <div class="mnav__top">
       <LogoLockup tone="dark" />
       <button class="mnav__close" type="button" aria-label="Close menu">
@@ -80,10 +84,37 @@ const isActive = (href: string) =>
   if (toggle && menu && closeBtn) {
     let lastFocus: HTMLElement | null = null;
 
+    // Everything that is not the menu: isolated while the menu is open so
+    // keyboard, pointer and assistive-technology users cannot interact with
+    // the background. inert also removes these subtrees from the a11y tree.
+    const backgroundSelectors = ['main', '.site-header__inner', '.site-footer', '.skip-link'];
+    const getBackground = () =>
+      backgroundSelectors
+        .map((sel) => document.querySelector(sel))
+        .filter((el): el is HTMLElement => el instanceof HTMLElement);
+
+    const isolateBackground = () => {
+      getBackground().forEach((el) => {
+        el.setAttribute('inert', '');
+        el.setAttribute('aria-hidden', 'true');
+      });
+    };
+    const releaseBackground = () => {
+      getBackground().forEach((el) => {
+        el.removeAttribute('inert');
+        el.removeAttribute('aria-hidden');
+      });
+    };
+
     const openMenu = () => {
       lastFocus = document.activeElement as HTMLElement;
       menu.classList.add('is-open');
       document.body.classList.add('menu-open');
+      // Dialog semantics only while open — see markup note above.
+      menu.setAttribute('role', 'dialog');
+      menu.setAttribute('aria-modal', 'true');
+      menu.setAttribute('aria-label', 'Site menu');
+      isolateBackground();
       toggle.setAttribute('aria-expanded', 'true');
       toggle.setAttribute('aria-label', 'Close menu');
       closeBtn.focus();
@@ -92,6 +123,10 @@ const isActive = (href: string) =>
     const closeMenu = (returnFocus = true) => {
       menu.classList.remove('is-open');
       document.body.classList.remove('menu-open');
+      menu.removeAttribute('role');
+      menu.removeAttribute('aria-modal');
+      menu.removeAttribute('aria-label');
+      releaseBackground();
       toggle.setAttribute('aria-expanded', 'false');
       toggle.setAttribute('aria-label', 'Open menu');
       if (returnFocus) (lastFocus ?? toggle).focus();
