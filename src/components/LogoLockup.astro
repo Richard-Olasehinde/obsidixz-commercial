@@ -1,0 +1,32 @@
+---
+/**
+ * Parent-brand lockup for Obsidixz Commercial.
+ * Complete parent emblem + wordmark (untouched artwork) with the live text
+ * "Commercial" immediately to its right, vertically centred against the
+ * full image box. Sizes per approved spec:
+ *   <640px → 80px logo / 12px label · 640–1023px → 96px / 14px · ≥1024px → 112px / 14px
+ * The link supplies the accessible name; artwork and label are aria-hidden.
+ */
+interface Props {
+  tone?: 'light' | 'dark';
+}
+const { tone = 'light' } = Astro.props;
+const src =
+  tone === 'dark'
+    ? '/brand/obsidixz-parent-logo-on-dark.png'
+    : '/brand/obsidixz-parent-logo-on-light.png';
+---
+
+<a href="/" class:list={['lockup', tone === 'dark' && 'lockup--on-dark']} aria-label="Obsidixz Commercial home">
+  <img
+    class="lockup__logo"
+    src={src}
+    alt=""
+    aria-hidden="true"
+    width="931"
+    height="785"
+    loading={tone === 'light' ? 'eager' : 'lazy'}
+    decoding="async"
+  />
+  <span class="lockup__label" aria-hidden="true">Commercial</span>
+</a>

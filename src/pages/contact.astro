@@ -1,0 +1,145 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const EMAIL = 'obsidixz.commercial@outlook.com';
+const MAILTO = 'mailto:obsidixz.commercial@outlook.com?subject=Obsidixz%20Commercial%20%E2%80%94%20Website%20enquiry';
+---
+
+<BaseLayout
+  title="Contact — Request Supplier Research | Obsidixz Commercial"
+  description="Email your enquiry to Obsidixz Commercial. Optional details that help: product or research assistance needed, approximate quantity, destination market and timeframe."
+  path="/contact"
+>
+  <section class="page-hero">
+    <div class="wrap">
+      <p class="crumb"><a href="/">Home</a> / Contact</p>
+      <p class="eyebrow">Contact / Request research</p>
+      <h1>Request Supplier Research.</h1>
+      <p class="lede" style="max-width:64ch;">
+        Whether you have a defined packaging brief or a half-formed question, email us —
+        general business questions are welcome alongside research requests. There is no
+        form to fill in; your own email app does the work.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap contact-grid">
+      {/* Email action panel */}
+      <div class="email-panel">
+        <p class="eyebrow" style="margin-bottom:0.5rem;">Email us directly</p>
+        <h2 style="font-size:1.45rem;">Email your enquiry</h2>
+
+        <a class="btn btn--primary" href={MAILTO} style="width:100%; justify-content:center; min-height:52px; font-size:1rem; margin:0.25rem 0 0.5rem;">
+          Email your enquiry
+        </a>
+
+        <a class="email-address" href={`mailto:${EMAIL}`} aria-label={`Email address: ${EMAIL}`}>
+          {EMAIL}
+        </a>
+
+        <div class="copy-row">
+          <button class="btn btn--ghost" id="copy-email" type="button" data-email={EMAIL}>
+            Copy email address
+          </button>
+        </div>
+        <p class="copy-status" id="copy-status" role="status" aria-live="polite"></p>
+
+        <p style="margin-top:1.1rem;">
+          This opens your email application. Write your message and send it there. If
+          nothing opens, copy the address into your preferred email service.
+        </p>
+        <p style="font-size:0.85rem; color:var(--ink); margin-bottom:0;">
+          Opening your email app sends nothing by itself — you write and click send
+          there. We cannot see your message until it arrives, and clicking the button
+          above proves nothing about delivery or receipt. We reply from the same address.
+        </p>
+
+        <noscript>
+          <style>
+            #copy-email { display: none; }
+            #copy-status::after { content: 'Copy is unavailable without JavaScript — select the address above instead.'; font-weight: 400; color: #292d32; }
+          </style>
+        </noscript>
+      </div>
+
+      {/* Supporting guidance */}
+      <div>
+        <div class="side-panel">
+          <h2>What helps us help you</h2>
+          <p style="font-size:0.9rem; margin-bottom:0.6rem;">Optional suggestions — a complete specification is not required:</p>
+          <ul>
+            <li>The product or research assistance you need</li>
+            <li>Approximate quantity, if known</li>
+            <li>Relevant market or destination</li>
+            <li>Timeframe, if known</li>
+          </ul>
+          <p style="font-size:0.85rem; margin:0.75rem 0 0; color:var(--ink);">
+            These are only prompts. If you know none of them, say so — the enquiry is
+            still worth sending.
+          </p>
+        </div>
+
+        <div class="caution" role="note">
+          <strong>Please do not include banking credentials, identity documents or
+          confidential product designs in your initial enquiry.</strong> If later stages
+          require sensitive material, we agree that separately and explicitly.
+        </div>
+
+        <div class="side-panel" style="margin-top:1.25rem;">
+          <h2>Prefer to check something first?</h2>
+          <p style="font-size:0.92rem; margin-bottom:0.5rem;">
+            General questions about scope, quotations, industries or process are welcome.
+            We typically respond within a few working days; this is an emerging service,
+            not a 24/7 desk.
+          </p>
+          <p style="font-size:0.88rem; margin:0;">
+            How we handle your message: see the <a href="/privacy">Privacy Policy</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const button = document.getElementById('copy-email');
+    const status = document.getElementById('copy-status');
+
+    if (button && status) {
+      const email = button.getAttribute('data-email') ?? '';
+
+      const announce = (message: string, isError = false) => {
+        status.textContent = message;
+        status.classList.toggle('is-error', isError);
+      };
+
+      const copyWithFallback = async () => {
+        // Preferred path: async clipboard API.
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(email);
+          return;
+        }
+        // Fallback: hidden textarea + execCommand for older/embedded browsers.
+        const textarea = document.createElement('textarea');
+        textarea.value = email;
+        textarea.setAttribute('readonly', '');
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        const ok = document.execCommand('copy');
+        document.body.removeChild(textarea);
+        if (!ok) throw new Error('execCommand copy failed');
+      };
+
+      button.addEventListener('click', async () => {
+        try {
+          await copyWithFallback();
+          announce('Email address copied');
+        } catch {
+          announce('Copy unavailable. Select and copy the email address above.', true);
+        }
+      });
+    }
+  </script>
+</BaseLayout>

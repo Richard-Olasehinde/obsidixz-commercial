@@ -1,0 +1,59 @@
+---
+import LogoLockup from './LogoLockup.astro';
+
+const year = new Date().getFullYear();
+const explore = [
+  { href: '/services', label: 'Services' },
+  { href: '/how-it-works', label: 'How It Works' },
+  { href: '/industries', label: 'Industries' },
+  { href: '/about', label: 'About Us' },
+  { href: '/contact', label: 'Contact' },
+];
+const policies = [
+  { href: '/privacy', label: 'Privacy Policy' },
+  { href: '/terms', label: 'Terms of Service' },
+];
+---
+
+<footer class="site-footer on-dark">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <LogoLockup tone="dark" />
+        <p>
+          International Procurement Intelligence — structured supplier research
+          and sourcing intelligence for packaging and B2B buyers. Operated remotely
+          from Nigeria, serving clients internationally.
+        </p>
+      </div>
+
+      <nav class="footer-col" aria-label="Explore">
+        <h3>Explore</h3>
+        <ul>
+          {explore.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+        </ul>
+      </nav>
+
+      <div class="footer-col">
+        <h3>Commercial enquiries</h3>
+        <ul>
+          <li><a href="mailto:obsidixz.commercial@outlook.com">obsidixz.commercial@outlook.com</a></li>
+          <li><a href="/contact">Request Supplier Research</a></li>
+        </ul>
+      </div>
+
+      <nav class="footer-col" aria-label="Legal and privacy">
+        <h3>Legal</h3>
+        <ul>
+          {policies.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+          <li><a href="mailto:obsidixz@outlook.com">Privacy questions: obsidixz@outlook.com</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© {year} Obsidixz Commercial. Obsidixz Commercial is a business expression of the Obsidixz parent brand.</span>
+      <span>Research and information support — not a marketplace, manufacturer or procurement outsourcer.</span>
+    </div>
+  </div>
+</footer>

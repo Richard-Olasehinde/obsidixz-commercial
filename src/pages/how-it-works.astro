@@ -1,0 +1,113 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const steps = [
+  {
+    num: '01',
+    title: 'Email the need',
+    text: 'Start with a short email to obsidixz.commercial@outlook.com. Tell us what you need sourced — product or packaging type, approximate quantities if known, target markets or destinations, and your timeframe if you have one. A few sentences are enough; a complete specification is not required.',
+  },
+  {
+    num: '02',
+    title: 'Clarify the requirements together',
+    text: 'We reply with questions: materials, formats, must-have features, certification needs, budget signals, what matters most. You confirm or correct our restatement of the brief. This is where most projects either become sharp or stay vague — we insist on the former.',
+  },
+  {
+    num: '03',
+    title: 'Feasibility assessment',
+    text: 'Before quoting, we look at what public information is likely to exist for your brief — which supplier types, which markets, which sources. If we believe the research will reach an unsatisfying dead-end, we say so in plain language before you commit a fee.',
+  },
+  {
+    num: '04',
+    title: 'Scope, deliverables and quotation — agreed separately',
+    text: 'You receive a written proposal: scope, deliverables, fixed fee and an indicative timeline. Research starts only after you confirm it in writing. Payment terms are part of that proposal and are agreed per project.',
+  },
+  {
+    num: '05',
+    title: 'Research',
+    text: 'Structured desk research across public commercial sources — supplier websites, directories, published documentation, trade presence. Every entry is recorded with its source and research date. Gaps are marked, not hidden.',
+  },
+  {
+    num: '06',
+    title: 'Delivery and follow-up',
+    text: 'You receive the report, followed by a walkthrough of findings, concerns and recommended next enquiries. Questions afterwards are welcome within the delivered scope; follow-on research is quoted separately.',
+  },
+];
+---
+
+<BaseLayout
+  title="How It Works — From Enquiry to Supplier Report | Obsidixz Commercial"
+  description="From your first email to a structured Supplier Discovery report: clarify requirements, feasibility assessment, written scope and quotation, research, delivery and follow-up."
+  path="/how-it-works"
+>
+  <section class="page-hero">
+    <div class="wrap">
+      <p class="crumb"><a href="/">Home</a> / How It Works</p>
+      <p class="eyebrow">How it works</p>
+      <h1>From your first email to a decision-ready report.</h1>
+      <p class="lede" style="max-width:64ch;">
+        A deliberate, written process — because the quality of research is decided
+        before the research starts. Here is exactly what happens, and what each step
+        does and does not commit you to.
+      </p>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="steps-heading">
+    <div class="wrap">
+      <h2 id="steps-heading" class="sr-only" style="position:absolute;left:-9999px;">The process, step by step</h2>
+      <ol class="hiw-list">
+        {steps.map((step) => (
+          <li class="hiw-step">
+            <span class="hiw-step__num" aria-hidden="true">{step.num}</span>
+            <span>
+              <strong class="hiw-step__title">{step.title}</strong>
+              <span class="hiw-step__text">{step.text}</span>
+            </span>
+          </li>
+        ))}
+      </ol>
+
+      <div class="notice" style="margin-top:2rem;" role="note" aria-label="What emailing does not authorise">
+        <strong>Emailing us does not authorise anything.</strong> It does not approve a
+        purchase, authorise supplier disclosure, place an order, or create a contract or
+        agreement. It simply starts a conversation. Nothing commercial begins until a
+        written scope and quotation are agreed between us.
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--grey" aria-labelledby="faq-heading">
+    <div class="wrap">
+      <p class="eyebrow">Common questions</p>
+      <h2 id="faq-heading">Straight answers</h2>
+      <div class="faq" style="margin-top:1.5rem;">
+        <details>
+          <summary>How long does a project take?</summary>
+          <p>It depends on the depth of the brief and the markets involved — there is no standard turnaround. An indicative timeline is part of your written proposal, and we flag early if it cannot be met.</p>
+        </details>
+        <details>
+          <summary>How much does it cost?</summary>
+          <p>Every quotation is individually tailored to the scope — we do not publish packages or prices. After the feasibility assessment you receive a fixed fee in writing; nothing starts before you approve it.</p>
+        </details>
+        <details>
+          <summary>How many suppliers will I get?</summary>
+          <p>As many as your brief and the available public information genuinely support — we never pad a report to reach a number, and we do not guarantee a figure in advance.</p>
+        </details>
+        <details>
+          <summary>Do you contact suppliers for me?</summary>
+          <p>Only under a separate written arrangement, and only where it is feasible and lawful. Supplier replies and quotations are not guaranteed — see <a href="/services">Services</a>.</p>
+        </details>
+        <details>
+          <summary>What if the research finds nothing useful?</summary>
+          <p>Then that is what the report says, with the reasons — which sources were exhausted, what was missing and where to look next. A clear negative is more valuable than an invented positive.</p>
+        </details>
+      </div>
+
+      <div style="display:flex; flex-wrap:wrap; gap:0.75rem; margin-top:2rem;">
+        <a class="btn btn--primary" href="/contact">Start with an email</a>
+        <a class="btn btn--ghost" href="/services">Review the service scope</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

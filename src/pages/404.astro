@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Page Not Found | Obsidixz Commercial"
+  description="The page you requested does not exist. Return to Obsidixz Commercial — International Procurement Intelligence."
+  path="/404"
+>
+  <section class="section section--dark on-dark" style="min-height: 60vh; display:flex; align-items:center;">
+    <div class="wrap">
+      <p class="eyebrow">404</p>
+      <h1 style="color:#fff; max-width:18ch;">This page isn’t in the catalogue.</h1>
+      <p class="lede" style="color: var(--text-on-dark); max-width:52ch;">
+        The link may be outdated or mistyped. The fastest routes from here:
+      </p>
+      <div style="display:flex; flex-wrap:wrap; gap:0.75rem; margin-top:1.5rem;">
+        <a class="btn btn--on-dark" href="/">Back to home</a>
+        <a class="btn btn--outline-dark" href="/contact">Request Supplier Research</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

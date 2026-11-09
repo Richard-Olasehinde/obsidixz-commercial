@@ -1,0 +1,330 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import heroImage from '../assets/images/hero-packaging-desk.jpg';
+import notebookImage from '../assets/images/research-notebook-desk.jpg';
+
+const reportContents = [
+  {
+    num: '01',
+    title: 'Requirement summary',
+    text: 'Your product, packaging need, target markets and constraints — restated plainly so we both know what the research covers.',
+  },
+  {
+    num: '02',
+    title: 'Potential suppliers',
+    text: 'Names, locations, public websites and available contact routes, exactly as found in public sources.',
+  },
+  {
+    num: '03',
+    title: 'Reasons for relevance',
+    text: 'Why each supplier appears in the report and how it connects to the criteria you set.',
+  },
+  {
+    num: '04',
+    title: 'Available company information',
+    text: 'What public sources show — ranges, stated capabilities, published certifications, markets served, where available.',
+  },
+  {
+    num: '05',
+    title: 'Sources and research dates',
+    text: 'Every entry traces to a recorded source and the date it was reviewed. Gaps are marked, not guessed.',
+  },
+  {
+    num: '06',
+    title: 'Comparison against your criteria',
+    text: 'Side-by-side against the requirements you set, so trade-offs are visible at a glance.',
+  },
+  {
+    num: '07',
+    title: 'Concerns, gaps and next enquiries',
+    text: 'What could not be confirmed, what deserves a follow-up question, and what to ask before you commit.',
+  },
+];
+
+const processSteps = [
+  {
+    num: '01',
+    title: 'Email the need',
+    text: 'Send a short note about what you are sourcing. Approximate quantities, markets and timeframes help, but are optional.',
+  },
+  {
+    num: '02',
+    title: 'Clarify requirements',
+    text: 'We ask follow-up questions and restate the brief, so the research targets your actual criteria — not a generic list.',
+  },
+  {
+    num: '03',
+    title: 'Assess feasibility',
+    text: 'Before any agreement, we look at whether public information is likely to support a useful answer — and say so honestly.',
+  },
+  {
+    num: '04',
+    title: 'Agree scope and quotation',
+    text: 'A fixed-fee, individually tailored quotation with scope and deliverables in writing. Nothing starts before you approve it.',
+  },
+  {
+    num: '05',
+    title: 'Research',
+    text: 'Structured desk research across public commercial sources, with sources and research dates recorded as we go.',
+  },
+  {
+    num: '06',
+    title: 'Deliver and follow up',
+    text: 'You receive the report, then a follow-up discussion to walk through concerns, gaps and recommended next enquiries.',
+  },
+];
+
+const audience = [
+  'SMEs developing or refreshing packaging',
+  'Importers and distributors adding suppliers',
+  'Growing consumer brands scaling production',
+  'Product developers sourcing components and packaging',
+  'Sourcing and procurement businesses extending capacity',
+];
+---
+
+<BaseLayout
+  title="International Procurement Intelligence | Obsidixz Commercial"
+  description="Obsidixz Commercial helps businesses identify potential suppliers, assess available commercial information and make better-informed procurement decisions through structured supplier research and sourcing intelligence."
+  path="/"
+>
+  {/* 1 — Photographic hero */}
+  <section class="hero on-dark" aria-labelledby="hero-heading">
+    <div class="wrap hero__grid">
+      <div class="hero__body">
+        <p class="eyebrow">Packaging &amp; Supplier Research</p>
+        <h1 id="hero-heading">International Procurement Intelligence.</h1>
+        <p class="lede">
+          Obsidixz Commercial helps businesses identify potential suppliers, assess
+          available commercial information and make better-informed procurement
+          decisions through structured supplier research and sourcing intelligence.
+        </p>
+        <div class="hero__ctas">
+          <a class="btn btn--primary" href="/contact">Request Supplier Research</a>
+          <a class="btn btn--outline-dark" href="/services">Explore Services</a>
+        </div>
+        <p class="hero__note">
+          Fixed-fee research projects, quoted individually. Packaging is our initial
+          industry focus — an emerging research service, not a marketplace or supplier
+          network.
+        </p>
+      </div>
+      <div class="hero__media">
+        <Image
+          src={heroImage}
+          alt="Carefully arranged packaging materials on a dark work surface — corrugated board, paperboard cartons, glass containers, material swatches and sample chips"
+          widths={[720, 1080, 1440]}
+          sizes="(min-width: 1024px) 52vw, 100vw"
+          loading="eager"
+          fetchpriority="high"
+        />
+      </div>
+    </div>
+  </section>
+
+  {/* 2 — Buyer-problem introduction */}
+  <section class="section" aria-labelledby="challenge-heading">
+    <div class="wrap">
+      <p class="eyebrow">The challenge</p>
+      <div class="lede-row">
+        <h2 id="challenge-heading">Finding suppliers is easy. Comparing them properly is&nbsp;not.</h2>
+        <div>
+          <p class="lede">
+            The information a buying decision needs rarely sits in one place. It is
+            scattered across company websites, trade directories, published filings and
+            product pages — each incomplete in different ways.
+          </p>
+          <p>
+            Researching which suppliers are genuinely relevant, and comparing what is
+            actually known about them, takes time and careful judgement. That is the
+            work Obsidixz Commercial does for you: organised, sourced research you can
+            act on — with the gaps stated honestly, not papered over.
+          </p>
+        </div>
+      </div>
+      <div class="fact-cols">
+        <div>
+          <h3>Sources disagree with each other</h3>
+          <p>Stated capabilities, markets served and contact routes often differ between a supplier&rsquo;s own pages and independent listings. We record what each source says — and where they diverge.</p>
+        </div>
+        <div>
+          <h3>Websites rarely answer buying questions</h3>
+          <p>Minimum order quantities, tooling, certifications and export readiness are frequently unpublished. We report what is available, and mark clearly what is not.</p>
+        </div>
+        <div>
+          <h3>Relevance is the hard part</h3>
+          <p>A long list is not a shortlist. We compare suppliers against your written criteria, so the trade-offs are visible before you spend time in conversation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* 3 — Supplier Discovery: the report */}
+  <section class="section section--grey" aria-labelledby="discovery-heading">
+    <div class="wrap">
+      <p class="eyebrow">Flagship service</p>
+      <h2 id="discovery-heading">Supplier Discovery</h2>
+      <p class="lede" style="max-width: 62ch; margin-bottom: 1.75rem;">
+        You describe what you need to source. We research potential suppliers across
+        public commercial information and deliver a structured report you can work
+        from — organised, sourced and dated, with concerns and gaps stated plainly.
+      </p>
+
+      <div class="report-panel" role="region" aria-label="Supplier Discovery report contents">
+        <div class="report-panel__head">
+          <span><b>Supplier Discovery</b> — Report contents</span>
+          <small>Included where available for your brief</small>
+        </div>
+        <div class="report-grid">
+          {reportContents.map((item) => (
+            <div class="report-item">
+              <span class="report-item__num" aria-hidden="true">{item.num}</span>
+              <div>
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div class="report-notes">
+          <p>
+            Supplier counts and outcomes are never guaranteed — every report reflects
+            your brief and what public information actually shows.
+          </p>
+          <p>
+            Preliminary Screening is a desk-based assessment of available information,
+            not independent Supplier Verification — we do not visit facilities, audit
+            suppliers or test products.
+          </p>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-wrap:wrap; gap:1rem; align-items:center; margin-top:1.5rem;">
+        <a class="btn btn--primary" href="/contact">Request Supplier Research</a>
+        <a class="text-link" href="/services">See the full service in scope →</a>
+      </div>
+    </div>
+  </section>
+
+  {/* 4 — Packaging focus, image + text */}
+  <section class="section" aria-labelledby="packaging-heading">
+    <div class="wrap split">
+      <figure>
+        <Image
+          src={notebookImage}
+          alt="Open notebook with hand-drawn packaging sketches and notes beside corrugated board samples, swatches, a magnifying glass and a jar on a wooden workbench"
+          widths={[560, 840]}
+          sizes="(min-width: 1024px) 42vw, 100vw"
+          loading="lazy"
+        />
+        <figcaption>
+          Packaging references, swatches and working notes. Illustrative photograph —
+          not Obsidixz’s office and not client work.
+        </figcaption>
+      </figure>
+      <div>
+        <p class="eyebrow">Initial industry focus</p>
+        <h2 id="packaging-heading">Packaging, researched against real criteria.</h2>
+        <p>
+          Packaging is where our research desk starts — from primary packs that touch
+          the product to the corrugated outer that survives the journey. We work
+          against the criteria that actually decide a fit, not a keyword search.
+        </p>
+        <ul class="checklist">
+          <li>Folding cartons, paperboard and rigid boxes</li>
+          <li>Corrugated cases and shipping packaging</li>
+          <li>Glass and rigid plastic bottles, jars and closures</li>
+          <li>Flexible films, pouches and lidding</li>
+          <li>Labels, sleeves and printed materials</li>
+          <li>Material and finish swatches, where samples are referenced</li>
+        </ul>
+        <p style="margin-top:1.25rem;">
+          <a class="text-link" href="/industries">How we research packaging requirements →</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  {/* 5 — Numbered process (dark) */}
+  <section class="section section--dark on-dark" aria-labelledby="process-heading">
+    <div class="wrap">
+      <p class="eyebrow">How it works</p>
+      <h2 id="process-heading">From your inbox to a decision-ready brief.</h2>
+      <div class="steps">
+        {processSteps.map((step) => (
+          <div class="step">
+            <span class="step__num" aria-hidden="true">{step.num}</span>
+            <div>
+              <h3>{step.title}</h3>
+              <p>{step.text}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+      <p style="margin-top:1.5rem; color: var(--text-muted-dark); font-size: 0.88rem; max-width: 62ch;">
+        Emailing us never authorises a purchase, supplier disclosure or order — and it
+        does not create an agreement. Scope, deliverables and fees are confirmed in
+        writing first.{' '}
+        <a class="text-link text-link--dark" href="/how-it-works">See each step in detail →</a>
+      </p>
+    </div>
+  </section>
+
+  {/* 6 — Audience & suitability */}
+  <section class="section" aria-labelledby="audience-heading">
+    <div class="wrap">
+      <p class="eyebrow">Who it is for</p>
+      <h2 id="audience-heading">Built for buyers with a genuine sourcing requirement.</h2>
+      <p class="lede" style="max-width: 62ch;">
+        Obsidixz Commercial is designed for businesses that need informed options before
+        they spend their own time — not for consumers hunting retail bargains, and not
+        as a substitute for doing your own final due diligence.
+      </p>
+      <div class="fit-grid">
+        <div class="fit-panel">
+          <h3>A strong fit when…</h3>
+          <ul>
+            <li>You have a defined product or packaging requirement and need organised, sourced options</li>
+            <li>You want criteria-based comparison rather than a raw supplier list</li>
+            <li>You lack in-house research capacity, or want a second, independent read</li>
+            <li>You are entering a new market or packaging category</li>
+          </ul>
+          <ul style="margin-top:0.9rem; padding-left:1.1rem;" aria-label="Who we serve">
+            {audience.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+        <div class="fit-panel fit-panel--muted">
+          <h3>Probably not the right fit when…</h3>
+          <ul>
+            <li>You need facility audits, factory inspections, product testing or QA sign-off</li>
+            <li>You need someone to negotiate, place orders or act as your purchasing authority</li>
+            <li>You want payment protection, escrow or dispute resolution</li>
+            <li>You want a ready-made supplier directory with instant guaranteed availability</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* 7 — Final enquiry invitation */}
+  <section class="section cta-band" aria-labelledby="cta-heading">
+    <div class="wrap">
+      <div>
+        <h2 id="cta-heading">Have a packaging requirement in mind?</h2>
+        <p style="margin:0; max-width: 52ch;">
+          Tell us what you need to source — a few sentences are enough to start.
+          We will reply with questions, an honest feasibility view and, if it fits,
+          a written scope and quotation.
+        </p>
+        <p style="margin:0.9rem 0 0; font-size:0.88rem;">
+          Or email directly:{' '}
+          <a class="mail" href="mailto:obsidixz.commercial@outlook.com">obsidixz.commercial@outlook.com</a>
+        </p>
+      </div>
+      <a class="btn btn--on-dark" href="/contact" style="min-height:52px; padding-inline:1.75rem; font-size:1rem;">
+        Request Supplier Research
+      </a>
+    </div>
+  </section>
+</BaseLayout>
