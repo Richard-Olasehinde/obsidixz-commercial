@@ -28,7 +28,8 @@ permissions:
   contents: read
 
 concurrency:
-  group: pages-${{ github.ref }}
+  # Single shared group: main deploys are serialized, push-check runs on branches queue normally.
+  group: pages
   cancel-in-progress: true
 
 jobs:
