@@ -28,9 +28,24 @@ npm run build        # production build → dist/
 npm run preview      # serve the production build (0.0.0.0:4321)
 npm run check        # astro check (types/content)
 npm run verify       # structural checks against dist/ (single h1, canonicals, mailto, …)
+npm run test:render  # rendered-browser checks against a served build (needs preview running)
+npm run test:render:all  # + interaction, no-JS and screenshot modes
 ```
 
-Rendered-browser checks (overflow at five widths, console errors, failed requests, 200% text zoom, menu + copy-button interaction) live in `scripts/rendered-checks.mjs`. They require a Chromium runtime; see `CONTINUATION.md` for the exact sandbox workaround and normal-machine usage.
+## Testing
+
+Structural checks: `npm run check` (types/content) and `npm run verify` (parse-based assertions
+on `dist/`). Browser checks: `scripts/rendered-checks.mjs` (declared dependencies
+`puppeteer-core` + `@sparticuz/chromium`), which requires a served build
+(`npm run preview` first, or `BASE_URL=http://host:port`). It verifies: layout at five
+widths × 10 routes (including an unmatched-route 404 returning HTTP 404 and the branded
+404 page), horizontal overflow, console errors, failed requests, visible lazy images,
+a 200% **root font-size** simulation (not real browser zoom), menu open/isolation/
+Escape/focus-return/breakpoint-reset, clipboard success + denial + legacy fallback
+paths, and the no-JavaScript experience (static navigation, exact mailto literal, no
+dialog semantics). CI separates `structural` and `browser` jobs; production deploys
+only from `main`. See `CONTINUATION.md` for re-running on a normal machine and for the
+sandbox NSPR/NSS procedure.
 
 ## Documentation
 
@@ -47,9 +62,10 @@ Rendered-browser checks (overflow at five widths, console errors, failed request
 ## Verification snapshot
 
 - `npm run build` ✓ · `npm run check` — 0 errors ✓ · `npm run verify` — all checks pass ✓
-- Rendered checks at 320/390/768/1024/1440 px: no horizontal overflow, no console errors, no failed requests ✓
-- 200% text zoom: no horizontal overflow ✓
-- Browser screenshots in `verification/screenshots/` (see `PROJECT_STATUS.md` for evidence notes)
+- Rendered checks at 320/390/768/1024/1440 px × 10 routes: no horizontal overflow, no console errors, no failed requests, no broken visible images ✓
+- 200% root font-size pass (text-size simulation, not browser zoom) ✓
+- Interaction suite (menu isolation/focus return, copy success/denial/fallback) ✓ · no-JS suite ✓
+- Browser screenshots in `verification/screenshots/` (identified in `PROJECT_STATUS.md`)
 
 ## Licence & use
 

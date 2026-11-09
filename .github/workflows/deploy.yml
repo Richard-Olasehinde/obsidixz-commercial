@@ -1,14 +1,24 @@
-# Deploy the static Astro build to GitHub Pages.
+# CI checks and production deployment for the Obsidixz Commercial site.
+#
+# Jobs:
+#   structural  — astro check (types), build, built-HTML verification. No browser.
+#   browser     — rendered-browser checks against the built site (Chromium via
+#                 @sparticuz/chromium; system libraries installed with apt below).
+#   deploy      — GitHub Pages deploy. Runs ONLY from the `main` branch
+#                 (pushes and workflow_dispatch selected on main). Feature
+#                 branches and pull requests run structural + browser checks
+#                 but never deploy.
+#
 # Prereqs (one-time, repo Settings): Pages → Source = "GitHub Actions",
-# and the custom domain set to commercial.obsidixz.pp.ua.
-# Repo must be PUBLIC (free plan) — see DEPLOYMENT.md.
-name: Deploy to GitHub Pages
+# custom domain commercial.obsidixz.pp.ua. Repo must be PUBLIC — see DEPLOYMENT.md §0.
+name: CI and Deploy
 
 on:
   push:
-    branches:
-      - arena/5a9708cf-obsidixz-commercial
-      - main
+    paths-ignore:
+      - '**/*.md'
+      - 'verification/**'
+  pull_request:
     paths-ignore:
       - '**/*.md'
       - 'verification/**'
@@ -16,15 +26,19 @@ on:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
-  group: pages
+  # Per-lane queue without ambiguous values:
+  #   push to main          -> pages-main         (deploys serialize; newest wins)
+  #   push to feature branch-> pages-<branch>     (slashes in branch names are fine for push)
+  #   pull_request          -> pages-pr-<number>  (github.ref = refs/pull/N/merge is NOT a
+  #                                                valid concurrency group; that value fails
+  #                                                the run before any job starts)
+  group: ${{ github.event_name == 'pull_request' && format('pages-pr-{0}', github.event.pull_request.number) || format('pages-{0}', github.ref_name) }}
   cancel-in-progress: true
 
 jobs:
-  build:
+  structural:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -35,7 +49,74 @@ jobs:
           cache: npm
 
       - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - run: npm run verify
 
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist
+          retention-days: 7
+
+  browser:
+    runs-on: ubuntu-latest
+    needs: structural
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+      - run: npm run build
+
+      # Chromium runtime libraries for @sparticuz/chromium.
+      # Ubuntu 22.04 names as written; if the runner image is 24.04 the fallback branch applies.
+      - name: Install Chromium runtime libraries
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libnss3 libnspr4 libatk1.0-0 libatk-bridge2.0-0 libcups2 libdrm2 libxkbcommon0 libxcomposite1 libxdamage1 libxfixes3 libxrandr2 libgbm1 libasound2 || \
+          sudo apt-get install -y libnss3 libnspr4 libatk1.0-0t64 libatk-bridge2.0-0t64 libcups2t64 libasound2t64
+
+      - name: Serve the production build
+        run: |
+          nohup npx astro preview --host 0.0.0.0 --port 4321 > preview.log 2>&1 &
+          for i in $(seq 1 60); do
+            curl -fsS http://127.0.0.1:4321/ >/dev/null 2>&1 && exit 0
+            sleep 2
+          done
+          echo "preview did not start"; cat preview.log; exit 1
+
+      - name: Rendered-browser checks
+        run: |
+          node scripts/rendered-checks.mjs check
+          node scripts/rendered-checks.mjs interact
+          node scripts/rendered-checks.mjs nojs
+
+  deploy:
+    needs: [structural, browser]
+    # Production goes out only from main — never from feature branches or PRs,
+    # including manual dispatches selected on other branches.
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
       - run: npm run check
       - run: npm run build
       - run: npm run verify
@@ -46,12 +127,5 @@ jobs:
         with:
           path: dist
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
       - id: deployment
         uses: actions/deploy-pages@v4

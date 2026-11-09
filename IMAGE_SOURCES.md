@@ -1,14 +1,24 @@
 # IMAGE SOURCES — Obsidixz Commercial
 
-All dates 2026-11-09. Licences reviewed at time of use. Nothing fetched from general
-search results is used in the site.
+All dates 2026-11-09. Nothing fetched from general search results is used in the site.
+
+> **Scope note on rights.** The two photographs are **AI-generated** (Arena's image
+> generation tool, this session). They are recorded here with their actual provenance and
+> the usage terms that apply to them: generated output is provided under the generating
+> service's terms, which grant the requesting user broad rights to use the output. We
+> make **no universal guarantee** that AI-generated imagery is free of every third-party
+> right or claim in every jurisdiction — no such guarantee is possible for generated
+> content, and we do not print one on the site or here. Nothing in the prompts or
+> outputs depicts identifiable real brands, logos or persons; outputs were reviewed as
+> photo-realistic and suitable for their roles; captions in the site describe both as
+> illustrative. The business accepted this approach explicitly.
 
 ## Photography (both required images)
 
 | Asset | Path in repo | Origin | Licence / terms | Modifications |
 |---|---|---|---|---|
-| Packaging still-life (hero) | `src/assets/images/hero-packaging-desk.jpg` | **AI-generated** with Arena's image-generation tool, this session (2026-11-09) | Generated content; no third-party rights. Generated for this project. | Build-time responsive WebP variants via `astro:assets` (22/46/77 kB); used also to derive `public/images/og-cover.jpg` (1200×630 center crop) |
-| Notebook & packaging samples (editorial) | `src/assets/images/research-notebook-desk.jpg` | **AI-generated** with the same tool, this session | Same as above | Build-time WebP variants (89/135 kB) |
+| Packaging still-life (hero) | `src/assets/images/hero-packaging-desk.jpg` | **AI-generated** with Arena's image-generation tool, this session (2026-11-09) | Generated output under the generating service's terms; requested by and generated for this project; no third-party stock licence applies, and no universal rights guarantee is made (see scope note above) | Build-time responsive WebP variants via `astro:assets` (22/46/77 kB); used also to derive `public/images/og-cover.jpg` (1200×630 center crop) |
+| Notebook & packaging samples (editorial) | `src/assets/images/research-notebook-desk.jpg` | **AI-generated** with Arena's image-generation tool, this session (2026-11-09) | Same as above | Build-time WebP variants (89/135 kB) |
 
 Generation prompts specified: editorial still-life photography; arranged packaging
 subjects (corrugated board, paperboard, glass containers, material swatches, notebook
