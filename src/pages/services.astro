@@ -1,0 +1,145 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const reportItems = [
+  ['Requirement summary', 'Your product, packaging need, target markets and constraints — restated as the shared basis of the research.'],
+  ['Potential supplier names', 'Where public information exists: names and locations of suppliers relevant to your brief.'],
+  ['Public websites and contacts', 'Published websites and contact routes as found — grouped, not presented as endorsed or verified.'],
+  ['Reasons for relevance', 'The specific connection between each supplier and your criteria.'],
+  ['Available company information', 'What public sources show about each business — stated capabilities, ranges, markets, published certifications.'],
+  ['Sources and research dates', 'A dated list of the sources reviewed for each entry.'],
+  ['Criteria comparison', 'Each supplier set against your stated requirements, with trade-offs visible.'],
+  ['Concerns and gaps', 'Missing, conflicting or unverifiable information — flagged, not smoothed over.'],
+  ['Recommended next enquiries', 'The questions worth asking next, and who to ask them of.'],
+];
+---
+
+<BaseLayout
+  title="Services — Supplier Discovery & Sourcing Research | Obsidixz Commercial"
+  description="Supplier Discovery research, Preliminary Screening and sourcing intelligence for packaging and B2B buyers. Individually tailored fixed-fee quotations. Clear scope, no invented prices."
+  path="/services"
+>
+  <section class="page-hero">
+    <div class="wrap">
+      <p class="crumb"><a href="/">Home</a> / Services</p>
+      <p class="eyebrow">Services</p>
+      <h1>Supplier Discovery, built around your requirement.</h1>
+      <p class="lede" style="max-width: 64ch;">
+        International procurement intelligence for packaging and B2B buyers — structured
+        research of public commercial information, organised into a report you can
+        compare, question and act on.
+      </p>
+    </div>
+  </section>
+
+  {/* Flagship: Supplier Discovery */}
+  <section class="section" aria-labelledby="sd-heading">
+    <div class="wrap">
+      <p class="eyebrow">Flagship service</p>
+      <h2 id="sd-heading">Supplier Discovery</h2>
+      <p class="lede" style="max-width:60ch;">
+        The core of what we do. You define the requirement; we research potential
+        suppliers and deliver a structured report that compares what is publicly known
+        against the criteria you set.
+      </p>
+
+      <h3 style="margin-top:1.75rem;">What the report contains</h3>
+      <p style="font-size:0.92rem; color:var(--ink);">Included where available — fewer, better-documented entries beat a padded list.</p>
+      <ul style="padding-left:1.2rem; display:grid; gap:0.45rem; max-width:72ch;">
+        {reportItems.map(([title, text]) => (
+          <li><strong>{title}.</strong> {text}</li>
+        ))}
+      </ul>
+      <p style="font-size:0.88rem; color:var(--ink); margin-top:0.75rem;">
+        We do not guarantee a fixed number of suppliers, response rates, pricing or
+        commercial outcomes. Some briefs support several candidates; others support
+        only a few — and some support none, which we will tell you rather than invent one.
+      </p>
+    </div>
+  </section>
+
+  {/* Preliminary Screening */}
+  <section class="section section--grey" aria-labelledby="ps-heading">
+    <div class="wrap prose">
+      <p class="eyebrow">Included within research scope</p>
+      <h2 id="ps-heading">Preliminary Screening</h2>
+      <p>
+        Every Supplier Discovery project includes a desk-based preliminary screen of the
+        suppliers we find. This means assessing <em>available information</em> —
+        published company details, stated capabilities, consistency between sources,
+        obvious red flags and information gaps.
+      </p>
+      <div class="notice">
+        <strong>This is not independent Supplier Verification.</strong> We do not visit
+        facilities, audit quality systems, interview supplier staff, run financial
+        checks or test products. For independent verification, factory inspection or
+        product testing, you will need a specialist provider — we can point you in a
+        sensible direction, but we do not perform or resell those services.
+      </div>
+
+      <h3>Procurement research and commercial comparison</h3>
+      <p>
+        Within research scope we cover the commercial context around a supplier decision:
+        stated pricing signals where published (rarely), minimum order quantities,
+        tooling and setup considerations as described by the supplier, payment terms if
+        published, lead-time signals and export experience where visible.
+      </p>
+      <p>
+        Findings are presented as comparison against <em>your</em> criteria — materials,
+        formats, quantities, destinations, must-have certifications — so you can weigh
+        options yourself. We provide information and structure; the purchasing decision
+        remains yours.
+      </p>
+
+      <h3>Supplier communication and RFQ coordination — conditional</h3>
+      <p>
+        If you would like us to contact shortlisted suppliers to request quotations or
+        clarify public information, this is possible only where it is actually feasible,
+        lawful and agreed with you in a separate written arrangement. It is not part of
+        the standard research scope.
+      </p>
+      <ul>
+        <li>Supplier replies and quotations are never guaranteed — many suppliers do not respond to cold outreach.</li>
+        <li>We never disclose your identity, brief or designs to a supplier without your explicit go-ahead.</li>
+        <li>Any messages we send are agreed with you in advance. Replies are forwarded to you; we do not negotiate on your behalf unless separately agreed in writing.</li>
+      </ul>
+    </div>
+  </section>
+
+  {/* Quotations and scope */}
+  <section class="section" aria-labelledby="scope-heading">
+    <div class="wrap prose">
+      <p class="eyebrow">Quotations &amp; scope</p>
+      <h2 id="scope-heading">Fixed-fee research, individually tailored.</h2>
+      <p>
+        Every engagement is quoted individually. There are no published packages and no
+        experimental price lists — the fee reflects the depth of research, the breadth of
+        the brief, the markets involved and the format you need.
+      </p>
+      <div class="table-like" role="table" aria-label="How quotations work">
+        <div role="row"><b role="rowheader">Written scope first</b><span role="cell">You receive a short written proposal: scope, deliverables, fee and indicative timeline. Research starts only after you confirm it.</span></div>
+        <div role="row"><b role="rowheader">Fixed fee</b><span role="cell">No hourly billing and no scope creep. If something material changes mid-project, we pause and agree the change in writing.</span></div>
+        <div role="row"><b role="rowheader">No outcome charges</b><span role="cell">We do not charge commissions, success fees or percentages of any purchase you go on to make.</span></div>
+        <div role="row"><b role="rowheader">Payment terms</b><span role="cell">Agreed in the written proposal for each project. They are deliberately not published as generic terms.</span></div>
+      </div>
+
+      <h3>Concise scope — what is not included</h3>
+      <ul>
+        <li>No independent verification, factory inspections, audits, product testing or quality assurance</li>
+        <li>No purchasing authority, order placement, negotiation, or acting as your agent</li>
+        <li>No shipping, freight, customs, logistics or warehousing services</li>
+        <li>No escrow, payment protection or dispute handling</li>
+        <li>No supplier network access — every supplier in a report is found through your brief</li>
+        <li>No guarantee of supplier availability, pricing, MOQ or outcomes</li>
+      </ul>
+      <p style="font-size:0.92rem;">
+        The full service boundaries are set out in our <a href="/terms">Terms of Service</a>.
+      </p>
+
+      <div style="display:flex; flex-wrap:wrap; gap:0.75rem; margin-top:1.5rem;">
+        <a class="btn btn--primary" href="/contact">Request Supplier Research</a>
+        <a class="btn btn--ghost" href="/how-it-works">See How It Works</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

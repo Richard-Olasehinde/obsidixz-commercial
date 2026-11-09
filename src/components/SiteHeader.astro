@@ -1,0 +1,143 @@
+---
+import LogoLockup from './LogoLockup.astro';
+
+const currentPath = Astro.url.pathname;
+
+const navItems = [
+  { href: '/', label: 'Home' },
+  { href: '/services', label: 'Services' },
+  { href: '/how-it-works', label: 'How It Works' },
+  { href: '/industries', label: 'Industries' },
+  { href: '/about', label: 'About Us' },
+  { href: '/contact', label: 'Contact' },
+];
+
+const isActive = (href: string) =>
+  href === '/' ? currentPath === '/' : currentPath.startsWith(href);
+---
+
+<header class="site-header">
+  <div class="wrap site-header__inner">
+    <LogoLockup tone="light" />
+
+    <nav class="site-nav" aria-label="Primary navigation">
+      {navItems.filter((i) => i.href !== '/').map((item) => (
+        <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
+          {item.label}
+        </a>
+      ))}
+    </nav>
+
+    <a class="btn btn--primary header-cta" href="/contact">Request Supplier Research</a>
+
+    <button
+      class="menu-btn"
+      type="button"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      aria-label="Open menu"
+    >
+      <span class="menu-btn__line"></span>
+      <span class="menu-btn__line"></span>
+      <span class="menu-btn__line"></span>
+    </button>
+  </div>
+
+  {/* Mobile navigation overlay */}
+  <div class="mnav on-dark" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Site menu">
+    <div class="mnav__top">
+      <LogoLockup tone="dark" />
+      <button class="mnav__close" type="button" aria-label="Close menu">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path d="M4 4L16 16M16 4L4 16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+
+    <nav class="mnav__links" aria-label="Mobile navigation">
+      {navItems.map((item) => (
+        <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
+          <span>{item.label}</span>
+          <small aria-hidden="true">0{navItems.indexOf(item) + 1}</small>
+        </a>
+      ))}
+    </nav>
+
+    <div class="mnav__foot">
+      <a class="btn btn--on-dark" href="/contact">Request Supplier Research</a>
+      <p>
+        Prefer email? <a href="mailto:obsidixz.commercial@outlook.com" style="color:#a8c4e8">obsidixz.commercial@outlook.com</a>
+      </p>
+    </div>
+  </div>
+</header>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('.menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  const closeBtn = menu?.querySelector<HTMLButtonElement>('.mnav__close');
+
+  if (toggle && menu && closeBtn) {
+    let lastFocus: HTMLElement | null = null;
+
+    const openMenu = () => {
+      lastFocus = document.activeElement as HTMLElement;
+      menu.classList.add('is-open');
+      document.body.classList.add('menu-open');
+      toggle.setAttribute('aria-expanded', 'true');
+      toggle.setAttribute('aria-label', 'Close menu');
+      closeBtn.focus();
+    };
+
+    const closeMenu = (returnFocus = true) => {
+      menu.classList.remove('is-open');
+      document.body.classList.remove('menu-open');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', 'Open menu');
+      if (returnFocus) (lastFocus ?? toggle).focus();
+    };
+
+    const isOpen = () => menu.classList.contains('is-open');
+
+    toggle.addEventListener('click', () => (isOpen() ? closeMenu() : openMenu()));
+    closeBtn.addEventListener('click', () => closeMenu());
+
+    // Close when any in-menu link is activated (navigation follows).
+    menu.querySelectorAll('a[href]').forEach((link) => {
+      link.addEventListener('click', () => closeMenu(false));
+    });
+
+    // Escape closes; focus stays inside the dialog while it is open.
+    document.addEventListener('keydown', (event) => {
+      if (!isOpen()) return;
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        closeMenu();
+        return;
+      }
+      if (event.key === 'Tab') {
+        const focusable = menu.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled])'
+        );
+        if (focusable.length === 0) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        const active = document.activeElement as HTMLElement;
+        if (event.shiftKey && active === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && active === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      }
+    });
+
+    // Leaving the mobile breakpoint while open: close and restore focus sensibly.
+    const desktopQuery = window.matchMedia('(min-width: 64rem)');
+    const onBreakpoint = () => {
+      if (desktopQuery.matches && isOpen()) closeMenu(false);
+    };
+    desktopQuery.addEventListener('change', onBreakpoint);
+  }
+</script>

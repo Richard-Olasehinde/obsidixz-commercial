@@ -1,0 +1,25 @@
+{
+  "name": "obsidixz-commercial",
+  "version": "1.0.1",
+  "description": "Obsidixz Commercial — International Procurement Intelligence. Supplier Discovery and sourcing research for packaging and B2B buyers.",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev --host 0.0.0.0",
+    "build": "astro build",
+    "preview": "astro preview --host 0.0.0.0",
+    "check": "astro check",
+    "verify": "node scripts/verify.mjs"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
+    "@fontsource/montserrat": "^5.3.0",
+    "@fontsource/open-sans": "^5.3.0",
+    "astro": "7.3.8"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.6",
+    "linkedom": "^0.18.12",
+    "typescript": "^5.9.3"
+  }
+}

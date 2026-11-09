@@ -1,0 +1,73 @@
+---
+import '@fontsource/montserrat/600.css';
+import '@fontsource/montserrat/700.css';
+import '@fontsource/open-sans/400.css';
+import '@fontsource/open-sans/600.css';
+import '../styles/global.css';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  /** Canonical path, e.g. "/services". Defaults to current pathname. */
+  path?: string;
+}
+
+const { title, description, path } = Astro.props;
+const canonicalPath = path ?? Astro.url.pathname;
+const canonical = new URL(canonicalPath, Astro.site).toString();
+const ogImage = new URL('/images/og-cover.jpg', Astro.site).toString();
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png" />
+    <link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png" />
+    <link rel="icon" href="/favicon-48x48.png" sizes="48x48" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#111111" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Obsidixz Commercial" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:alt" content="Carefully arranged packaging materials and samples on a dark work surface" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    {/* No-JS fallback: expose the navigation as a plain static list beneath the header. */}
+    <noscript>
+      <style>
+        .menu-btn { display: none !important; }
+        .mnav { display: block !important; position: static !important; background: #fff !important; color: #292d32 !important; border-bottom: 1px solid #e2e4e8; padding: 1rem 1.25rem 1.5rem !important; }
+        .mnav__top { display: none !important; }
+        .mnav__links { margin-top: 0 !important; }
+        .mnav__links a { color: #292d32 !important; border-bottom: 1px solid #e2e4e8 !important; font-size: 1.05rem !important; }
+        .mnav__links a small { color: #6b7280 !important; }
+        .mnav__foot { padding-top: 1rem !important; }
+        .mnav__foot p, .mnav__foot a { color: #292d32 !important; }
+      </style>
+    </noscript>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <SiteHeader />
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+    <SiteFooter />
+  </body>
+</html>

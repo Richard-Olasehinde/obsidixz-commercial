@@ -1,0 +1,127 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import notebookImage from '../assets/images/research-notebook-desk.jpg';
+
+const categories = [
+  ['Folding cartons & paperboard', 'Retail cartons, sleeves and printed boards — materials, grammage, finishes and print capability as published.'],
+  ['Corrugated & shipping', 'RSC cases, die-cut shippers, inserts and protective transit packaging — board grades and stated capacities where available.'],
+  ['Rigid boxes & set-up boxes', 'Premium rigid packaging for gift, cosmetics and consumer goods — construction and finishing signals from public material.'],
+  ['Glass & rigid plastic', 'Bottles, jars, caps and closures — stated volumes, neck finishes and material types as published by manufacturers.'],
+  ['Flexible packaging', 'Films, pouches, lidding and sachets — stated structures, formats and barrier claims where public.'],
+  ['Labels & printed materials', 'Self-adhesive labels, sleeves, foils and printed inserts — print processes and MOQ signals.'],
+];
+
+const criteria = [
+  'Materials and construction you specified',
+  'Minimum order quantities and tooling implications',
+  'Print, decoration and finishing capability',
+  'Certifications and compliance signals as published (e.g. food-contact suitability, FSC, BRCGS)',
+  'Markets served and export experience, where visible',
+  'Company information: scale signals, stated capacity, history, locations',
+  'Communication accessibility from public contact routes',
+  'Any must-have criteria you set in the brief',
+];
+---
+
+<BaseLayout
+  title="Industries — Packaging Supplier Research | Obsidixz Commercial"
+  description="Packaging-first supplier research: folding cartons, corrugated, rigid boxes, glass and rigid plastic, flexible films, labels and closures — compared against your criteria."
+  path="/industries"
+>
+  <section class="page-hero">
+    <div class="wrap">
+      <p class="crumb"><a href="/">Home</a> / Industries</p>
+      <p class="eyebrow">Industries</p>
+      <h1>Packaging first — with an honest answer for everything else.</h1>
+      <p class="lede" style="max-width:64ch;">
+        Our research desk is built around packaging and the businesses that buy it.
+        Other research needs are assessed individually — we would rather decline than
+        stretch.
+      </p>
+    </div>
+  </section>
+
+  {/* Packaging — substantial section */}
+  <section class="section" aria-labelledby="pkg-heading">
+    <div class="wrap split">
+      <div>
+        <p class="eyebrow">Focus industry</p>
+        <h2 id="pkg-heading">Packaging, from primary pack to outer shipper.</h2>
+        <p>
+          Packaging buying combines materials knowledge with commercial judgement —
+          a folding carton supplier and a corrugated converter look similar in a
+          directory but behave very differently in practice. We research the
+          categories where that distinction decides your outcome:
+        </p>
+        <div class="table-like" style="margin-top:1.25rem;">
+          {categories.map(([title, text]) => (
+            <div><b>{title}</b><span>{text}</span></div>
+          ))}
+        </div>
+      </div>
+      <figure>
+        <Image
+          src={notebookImage}
+          alt="Notebook with packaging sketches on a workbench surrounded by corrugated swatches, paperboard sheets, a magnifying glass and a glass sample jar"
+          widths={[560, 840]}
+          sizes="(min-width: 1024px) 42vw, 100vw"
+          loading="lazy"
+        />
+        <figcaption>
+          Criteria-led review of packaging samples and notes. Illustrative photograph —
+          not client work.
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section section--grey" aria-labelledby="criteria-heading">
+    <div class="wrap">
+      <p class="eyebrow">How we research packaging</p>
+      <h2 id="criteria-heading">The criteria we work against</h2>
+      <p style="max-width:66ch;">
+        Every packaging brief is compared against a written set of criteria drawn from
+        your requirement. Typically this includes:
+      </p>
+      <ul class="checklist" style="columns: auto; max-width:66ch;">
+        {criteria.map((item) => <li>{item}</li>)}
+      </ul>
+      <p style="margin-top:1.5rem; font-size:0.92rem; color:var(--ink);">
+        Certifications and compliance signals are reported only as published — we do not
+        verify certificates, audit factories or test materials. Where a brief depends on
+        verified compliance, pair our research with an accredited inspection or testing
+        provider.
+      </p>
+    </div>
+  </section>
+
+  {/* Other needs */}
+  <section class="section" aria-labelledby="other-heading">
+    <div class="wrap prose">
+      <p class="eyebrow">Beyond packaging</p>
+      <h2 id="other-heading">Other research needs — assessed case by case</h2>
+      <p>
+        Packaging is where we are building depth first. Adjacent B2B sourcing questions —
+        for example components, consumables or industrial supplies for a defined business
+        requirement — may be researchable with the same method: public-source research,
+        written criteria, honest gaps.
+      </p>
+      <p>
+        Equally, some requests are outside what we should take on: consumer shopping
+        advice, regulated product compliance sign-off, or anything requiring laboratory
+        testing. If your requirement is not a fit, we will tell you before any agreement —
+        not after you have paid a fee.
+      </p>
+      <p style="font-size:0.92rem; color:var(--ink);">
+        We do not claim established expertise in industries we have not researched. If we
+        take on a brief outside packaging, it is because we believe we can serve it well —
+        and the scope will say so explicitly.
+      </p>
+      <div style="display:flex; flex-wrap:wrap; gap:0.75rem; margin-top:1.5rem;">
+        <a class="btn btn--primary" href="/contact">Describe your requirement</a>
+        <a class="btn btn--ghost" href="/how-it-works">See how engagement works</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

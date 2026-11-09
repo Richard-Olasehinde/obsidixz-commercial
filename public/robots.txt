@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://commercial.obsidixz.pp.ua/sitemap-index.xml
