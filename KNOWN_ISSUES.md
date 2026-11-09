@@ -18,7 +18,7 @@
 ## Cosmetic / accepted
 
 10. **`.menu-btn` hover border on mobile** — decorative only, no functional impact.
-11. **404 page** sets `canonical` to `/404`; excluded from sitemap by design (Astro sitemap excludes it? — confirm post-deploy; if indexed it would not harm, but 404s should not be in sitemaps. Current sitemap is generated from `site` and includes only existing routes; 404.html is included in the build but sitemap only lists route pages — verify `sitemap-0.xml` after deploy).
+11. **Sitemap contents confirmed** post-build: `dist/sitemap-0.xml` lists exactly the 8 route pages (no 404). Re-check after any route additions.
 12. **`og:image`** points at `/images/og-cover.jpg` (1200×630, crop of hero). Some platforms cache aggressively; first share may serve a stale card after any later change.
 13. **`/how-it-works` inline grid number column** is `3.25rem` at all widths — deliberate for the numeral-aligned editorial look.
 
