@@ -145,3 +145,63 @@ All decisions 2026-11-09 unless dated.
     with an event-aware group (`pages-pr-<number>` for PRs, `pages-<ref_name>` otherwise).
     Verified green: push run 42674361866 (3m8s, structural+browser, deploy skipped) and
     pull_request run 42675013448 (2m5s) on this branch.
+
+## Addendum — buyer-journey redesign (2026-11-10, fourth pass)
+
+33. **Homepage reorganised around the buyer's four questions, in order.** The sequence is
+    now: (1) "What sourcing question do I need answered?" (example questions buyers bring,
+    clearly labelled as examples), (2) "What does Supplier Discovery provide?" (work vs
+    boundaries, side-by-side), (3) "What information will the resulting report contain?"
+    (tangible report exhibit), (4) "How do I start a discussion about my research needs?"
+    (process: discussion → restated brief → feasibility view → fixed-fee individually
+    tailored quotation in writing → research → report + follow-up walkthrough). Every
+    section has a distinct structure (ordered question rows / two-panel comparison /
+    document exhibit / numbered steps), so the page no longer renders consecutive sections
+    as interchangeable card grids. The audience fit-grid remains as a comparison, not a
+    carousel. Repeated "honest/emerging/careful" ceremony copy was removed; each
+    limitation now appears once, at the point it matters.
+
+34. **The report is now a tangible, illustrative exhibit — never a fake client artefact.**
+    A five-part spine mirrors how the deliverable actually reads: **Requirements →
+    Potential suppliers → Sources → Gaps → Recommended enquiries**. An "Illustrative
+    report structure" tag (Burnished-Gold-soft pill on a black bar) and a one-line warning
+    appear **before** any sample content, and each cell of the end-to-end criterion
+    example table is a neutral, unverifiable-by-design entry (PUBLISHED / GAP / CONFLICT
+    states — e.g. "Not stated in any source reviewed — recorded as unconfirmed, not
+    estimated"). No real suppliers, prices, certifications, dates or outcomes are shown,
+    and the notes beneath the exhibit state that counts and outcomes are never guaranteed
+    and that Preliminary Screening is desk-based research, not independent Supplier
+    Verification. On screens <48rem the table becomes a labelled stacked layout
+    (`data-label` cells; thead visually hidden) instead of a clipped-out horizontal scroll.
+
+35. **The notebook/workbench photograph was removed from the homepage.** It repeated the
+    family's "research desk" pattern without adding packaging-specific information — and
+    duplicated the identical asset used on /industries. The packaging section is now
+    structured rows — six categories, each stating what is researched for it (e.g. board
+    grades and print capability for folding cartons; volumes, neck finishes and
+    food-contact statements for glass and rigid plastic). The hero photograph is
+    unchanged; the notebook image remains on /industries.
+
+36. **CTA language changed site-wide to invite discussion, not purchase.** "Request
+    Supplier Research" → "Discuss your research needs" (header, mobile menu, hero,
+    sections, footer, 404, about, services, contact H1/title, CTA band). Contacting
+    Commercial never buys a package, appoints a purchasing agent or authorises procurement;
+    the process note under the steps and the Terms already say so and remain the
+    authority on scope. `scripts/verify.mjs`'s single CTA assertion was updated to the new
+    literal — an intentional copy change, not a weakened check. The approved enquiry
+    subject (`Obsidixz Commercial — Website enquiry`), the exact mailto literal, the
+    copy-to-clipboard success/denial/fallback behaviour, and the visible selectable
+    address are unchanged and re-verified.
+
+37. **Sticky-header overlap fixed globally; HTTPS state corrected in docs.** All `[id]`
+    anchors now carry `scroll-margin-top: 8rem` (the sticky header is ~115px tall at
+    desktop because of the approved 112px lockup — the earlier 5.25rem value let section
+    headings slide under it on fragment navigation). Per the founder (2026-11-10), the
+    HTTPS destination was **independently confirmed working on 10 November 2026**; this
+    log and DEPLOYMENT.md/PROJECT_STATUS.md now record that as founder-confirmed, not
+    sandbox-verified. Email receipt/reply at obsidixz.commercial@outlook.com remains
+    unverified and NOT DONE. Verified rendering: served production build (`astro preview`)
+    under headless Chromium — 5 widths × 10 routes + expected-404
+    (no overflow/console errors/failed requests/broken images), interaction suite
+    (menu isolation/Escape/focus-return, clipboard success/denial/legacy fallback),
+    no-JS suite — all PASS; Lighthouse/axe still not run (not available here).

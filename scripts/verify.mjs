@@ -109,7 +109,7 @@ ok(contactHtml.includes('Please do not include banking credentials'), 'contact: 
 // Home page essentials
 const homeHtml = readFileSync(join(DIST, 'index.html'), 'utf8');
 ok(homeHtml.includes('International Procurement Intelligence.'), 'home: positioning line present');
-ok(homeHtml.includes('Request Supplier Research'), 'home: primary CTA present');
+ok(homeHtml.includes('Discuss your research needs'), 'home: primary CTA present');
 
 // Error summary
 if (failures > 0) {

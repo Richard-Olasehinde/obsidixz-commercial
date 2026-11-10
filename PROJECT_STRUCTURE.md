@@ -43,8 +43,9 @@
 │  ├─ layouts/BaseLayout.astro # head meta/canonical/OG/favicons/noscript fallback,
 │  │                            # skip link, header/footer, slot
 │  └─ pages/
-│     ├─ index.astro           # hero → challenge → Supplier Discovery panel →
-│     │                         # packaging editorial → dark process → audience fit → royal CTA
+│     ├─ index.astro           # buyer journey: Q1 question → Supplier Discovery scope →
+│     │                         # packaging rows → illustrative report exhibit → dark process →
+│     │                         # audience fit → royal CTA
 │     ├─ services.astro        # Supplier Discovery, Preliminary Screening, RFQ-conditional,
 │     │                         # quotations, scope limits
 │     ├─ how-it-works.astro    # 6 numbered steps, no-authorisation notice, FAQ
@@ -63,16 +64,23 @@
 │  └─ deploy.yml               # structural + browser jobs; deploy gated to main
 │
 └─ verification/
-   └─ screenshots/             # browser evidence PNGs (build served from dist/)
+   ├─ screenshots/             # browser evidence PNGs (build served from dist/) — after
+   │  ├─ home-desktop-header-hero-1440x900.png
+   │  ├─ home-desktop-full-1440.png
+   │  ├─ home-packaging-rows-1440x900.png   # replaces home-lower-editorial (renamed)
+   │  ├─ home-report-exhibit-1440x900.png
+   │  ├─ home-mobile-390x844.png
+   │  ├─ mobile-menu-expanded-390x844.png
+   │  ├─ services-desktop-1440x900.png
+   │  ├─ how-it-works-desktop-1440x900.png
+   │  ├─ contact-desktop-1440x900.png
+   │  └─ contact-mobile-390x844.png
+   └─ baseline/                # genuine before-renders (build at ae0f6cf, captured pre-edit)
       ├─ home-desktop-header-hero-1440x900.png
       ├─ home-desktop-full-1440.png
       ├─ home-lower-editorial-1440x900.png
       ├─ home-mobile-390x844.png
-      ├─ mobile-menu-expanded-390x844.png
-      ├─ services-desktop-1440x900.png
-      ├─ how-it-works-desktop-1440x900.png
-      ├─ contact-desktop-1440x900.png
-      └─ contact-mobile-390x844.png
+      ├─ home-report-before-1440x900.png
 ```
 
 ## Rendered output (dist/)

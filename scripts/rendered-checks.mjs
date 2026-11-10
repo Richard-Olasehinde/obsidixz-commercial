@@ -373,7 +373,8 @@ if (mode === 'shots' || mode === 'all') {
   };
   await shot('/', 1440, 900, 'home-desktop-header-hero-1440x900.png');
   await shot('/', 1440, 900, 'home-desktop-full-1440.png', { fullPage: true, scroll: true });
-  await shot('/', 1440, 900, 'home-lower-editorial-1440x900.png', { target: '#packaging-heading' });
+  await shot('/', 1440, 900, 'home-packaging-rows-1440x900.png', { target: '#packaging-heading' });
+  await shot('/', 1440, 900, 'home-report-exhibit-1440x900.png', { target: '#report-heading' });
   await shot('/', 390, 844, 'home-mobile-390x844.png', { fullPage: true, scroll: true });
   await shot('/services', 1440, 900, 'services-desktop-1440x900.png');
   await shot('/how-it-works', 1440, 900, 'how-it-works-desktop-1440x900.png');
