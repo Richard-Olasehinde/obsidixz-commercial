@@ -715,135 +715,6 @@ body.menu-open {
   }
 }
 
-.fact-cols {
-  display: grid;
-  gap: 0;
-  border-top: 1px solid var(--line);
-  margin-top: 1.25rem;
-}
-
-.fact-cols > div {
-  border-bottom: 1px solid var(--line);
-  padding: 1rem 0;
-}
-
-.fact-cols h3 {
-  font-size: 1.02rem;
-  margin-bottom: 0.35rem;
-}
-
-.fact-cols p {
-  font-size: 0.92rem;
-  color: var(--ink);
-  margin: 0;
-}
-
-/* Supplier Discovery report panel */
-.report-panel {
-  background: #fff;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  box-shadow: 0 24px 60px -32px rgba(17, 17, 17, 0.35);
-  overflow: hidden;
-}
-
-.report-panel__head {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
-  padding: 1rem 1.5rem;
-  border-bottom: 1px solid var(--line);
-  background: var(--grey);
-}
-
-.report-panel__head span {
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 0.72rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--charcoal);
-}
-
-.report-panel__head span b {
-  color: var(--royal);
-}
-
-.report-panel__head small {
-  font-size: 0.72rem;
-  color: var(--ink);
-}
-
-.report-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-}
-
-@media (min-width: 48rem) {
-  .report-grid {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  }
-}
-
-.report-item {
-  display: grid;
-  grid-template-columns: 3rem 1fr;
-  gap: 0.75rem;
-  padding: 1.15rem 1.5rem;
-  border-bottom: 1px solid var(--line);
-}
-
-@media (min-width: 48rem) {
-  .report-item:nth-child(odd) {
-    border-right: 1px solid var(--line);
-  }
-  .report-item:nth-last-child(-n + 2):nth-child(odd),
-  .report-item:last-child {
-    border-bottom: 0;
-  }
-}
-
-.report-item:last-child {
-  border-bottom: 0;
-}
-
-.report-item__num {
-  font-family: var(--font-display);
-  font-weight: 700;
-  color: var(--royal);
-  font-size: 1rem;
-  padding-top: 0.1rem;
-}
-
-.report-item h3 {
-  font-size: 0.98rem;
-  margin-bottom: 0.25rem;
-}
-
-.report-item p {
-  font-size: 0.86rem;
-  color: var(--ink);
-  margin: 0;
-}
-
-.report-notes {
-  display: grid;
-  gap: 0.5rem;
-  padding: 1rem 1.5rem;
-  border-top: 1px solid var(--line);
-  background: #fdfcf9;
-}
-
-.report-notes p {
-  font-size: 0.82rem;
-  color: var(--ink);
-  margin: 0;
-  padding-left: 1rem;
-  border-left: 2px solid var(--gold);
-}
-
 /* Image-and-text sections */
 .split {
   display: grid;
@@ -1297,7 +1168,8 @@ body.menu-open {
 .split > *,
 .lede-row > *,
 .steps > *,
-.report-grid > *,
+.scope-grid > *,
+.report-exhibit__body > *,
 .fit-grid > *,
 .contact-grid > *,
 .footer-grid > *,
@@ -1321,12 +1193,14 @@ a {
   text-align: center;
 }
 
-.report-item {
-  grid-template-columns: 3rem minmax(0, 1fr);
+.report-doc__row {
+  grid-template-columns: 2.6rem minmax(0, 1fr);
 }
 
-.report-item > *,
-.step > * {
+.step > *,
+.report-doc__row > *,
+.queries li > *,
+.focus-row > * {
   min-width: 0;
 }
 
@@ -1373,6 +1247,394 @@ a {
   font-size: 0.95rem;
 }
 
+/* ---------- Homepage — buyer journey ---------- */
+/* Q1 — sourcing questions */
+.queries__label {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin: 2.25rem 0 0.75rem;
+}
+
+.queries {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--line);
+}
+
+.queries li {
+  display: grid;
+  grid-template-columns: 1.75rem minmax(0, 1fr);
+  gap: 0.75rem;
+  align-items: baseline;
+  padding: 0.95rem 0.25rem;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(0.95rem, 0.9rem + 0.3vw, 1.06rem);
+  color: var(--charcoal);
+}
+
+.queries__mark {
+  color: var(--gold);
+  font-weight: 700;
+}
+
+.queries__foot {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: var(--ink);
+}
+
+/* Q2 — work / boundaries comparison */
+.scope-grid {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.75rem;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (min-width: 48rem) {
+  .scope-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 1.25rem;
+  }
+}
+
+.scope-panel {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--royal);
+  border-radius: var(--radius);
+  padding: 1.35rem 1.5rem;
+}
+
+.scope-panel--muted {
+  border-top-color: #c9cdd3;
+}
+
+.scope-panel h3 {
+  font-size: 1.02rem;
+  margin-bottom: 0.6rem;
+}
+
+.scope-panel ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.scope-panel li {
+  position: relative;
+  padding-left: 1.35rem;
+  font-size: 0.92rem;
+  color: var(--ink);
+}
+
+.scope-panel li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.32em;
+  width: 0.5rem;
+  height: 0.5rem;
+  transform: rotate(45deg);
+  background: var(--royal);
+}
+
+.scope-panel--muted li::before {
+  background: #b9bec6;
+}
+
+.scope-foot {
+  margin-top: 1.1rem;
+  font-size: 0.88rem;
+  color: var(--ink);
+}
+
+/* Packaging focus — structured rows, not cards */
+.focus-rows {
+  list-style: none;
+  margin: 2rem 0 0;
+  padding: 0;
+  border-top: 1px solid var(--line);
+}
+
+.focus-row {
+  display: grid;
+  grid-template-columns: 2.6rem minmax(0, 1fr);
+  gap: 0.35rem 1rem;
+  padding: 1rem 0.25rem;
+  border-bottom: 1px solid var(--line);
+  align-items: baseline;
+}
+
+.focus-row__num {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--royal);
+  font-size: 0.95rem;
+}
+
+.focus-row__category {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--black);
+  font-size: 0.98rem;
+}
+
+.focus-row__detail {
+  grid-column: 2;
+  font-size: 0.92rem;
+  color: var(--ink);
+}
+
+@media (min-width: 48rem) {
+  .focus-row {
+    grid-template-columns: 2.6rem minmax(11rem, 15rem) minmax(0, 1fr);
+    gap: 1.5rem;
+  }
+  .focus-row__detail {
+    grid-column: auto;
+  }
+}
+
+/* Q3 — the deliverable: an illustrative report, styled as a document */
+.report-exhibit {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: 0 24px 60px -32px rgba(17, 17, 17, 0.35);
+  overflow: hidden;
+  margin-top: 1.5rem;
+}
+
+.report-exhibit__bar {
+  background: var(--black);
+  padding: 0.9rem 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 1.25rem;
+}
+
+.report-exhibit__tag {
+  display: inline-block;
+  background: var(--gold-soft);
+  color: #171310;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 0.35rem 0.7rem;
+  border-radius: var(--radius);
+  white-space: nowrap;
+}
+
+.report-exhibit__note {
+  color: #cfc8bc;
+  font-size: 0.8rem;
+}
+
+.report-exhibit__body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (min-width: 64rem) {
+  .report-exhibit__body {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  }
+}
+
+.report-doc {
+  list-style: none;
+  margin: 0;
+  padding: 0.5rem 0;
+  border-right: 0;
+}
+
+@media (min-width: 64rem) {
+  .report-doc {
+    border-right: 1px solid var(--line);
+  }
+}
+
+.report-doc__row {
+  display: grid;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--line);
+  align-items: start;
+}
+
+.report-doc__row:last-child {
+  border-bottom: 0;
+}
+
+.report-doc__num {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--royal);
+  font-size: 0.95rem;
+  padding-top: 0.15rem;
+}
+
+.report-doc__row h3 {
+  font-size: 0.98rem;
+  margin-bottom: 0.2rem;
+}
+
+.report-doc__row p {
+  font-size: 0.86rem;
+  color: var(--ink);
+  margin: 0;
+}
+
+.report-extract {
+  padding: 1.25rem 1.5rem 1.5rem;
+  background: #fdfcf9;
+  border-top: 1px solid var(--line);
+}
+
+@media (min-width: 64rem) {
+  .report-extract {
+    border-top: 0;
+  }
+}
+
+.report-extract__label {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--charcoal);
+  margin: 0 0 0.6rem;
+}
+
+.report-extract__close {
+  margin: 1rem 0 0;
+  font-size: 0.88rem;
+  color: var(--ink);
+}
+
+.criteria-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #fff;
+}
+
+.criteria-table {
+  width: 100%;
+  min-width: 34rem;
+  border-collapse: collapse;
+  font-size: 0.84rem;
+}
+
+.criteria-table caption {
+  text-align: left;
+  padding: 0.55rem 0.85rem;
+  font-size: 0.72rem;
+  color: var(--ink);
+  background: var(--grey);
+  border-bottom: 1px solid var(--line);
+}
+
+.criteria-table th,
+.criteria-table td {
+  text-align: left;
+  vertical-align: top;
+  padding: 0.6rem 0.85rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.criteria-table thead th {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--royal-deep);
+  background: #fff;
+}
+
+.criteria-table tbody th {
+  font-weight: 600;
+  color: var(--charcoal);
+}
+
+.criteria-table tbody tr:last-child th,
+.criteria-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.state {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0.15rem 0.45rem;
+  border-radius: 2px;
+  border: 1px solid transparent;
+  margin-right: 0.4rem;
+  white-space: nowrap;
+}
+
+.state--published {
+  color: var(--royal-deep);
+  background: #e9eef6;
+  border-color: #c9d6e8;
+}
+
+.state--gap {
+  color: #8a4b1d;
+  background: #f7ecdd;
+  border-color: #e3cdb2;
+}
+
+.state--conflict {
+  color: var(--charcoal);
+  background: #eceae6;
+  border-color: #d8d4cc;
+}
+
+/* Q3 — honesty notes (below the exhibit) */
+.report-notes {
+  display: grid;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+  max-width: 78ch;
+}
+
+.report-notes p {
+  font-size: 0.84rem;
+  color: var(--ink);
+  margin: 0;
+  padding-left: 1rem;
+  border-left: 2px solid var(--gold);
+}
+
+/* Who it is for — audience line */
+.audience-line {
+  margin: 1.5rem 0 0;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--line);
+  font-size: 0.88rem;
+  color: var(--ink);
+  max-width: 80ch;
+}
+
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   html {
@@ -1384,5 +1646,66 @@ a {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+/* Anchor offset for the sticky header */
+[id] {
+  scroll-margin-top: 8rem;
+}
+
+/* Criteria table: stacked card layout below 48rem */
+@media (max-width: 47.99rem) {
+  .criteria-table-wrap {
+    overflow-x: visible;
+  }
+  .criteria-table {
+    min-width: 0;
+    display: block;
+    font-size: 0.85rem;
+  }
+  .criteria-table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+  }
+  .criteria-table tbody,
+  .criteria-table tr,
+  .criteria-table th,
+  .criteria-table td {
+    display: block;
+    width: 100%;
+  }
+  .criteria-table tbody tr {
+    border-bottom: 1px solid var(--line);
+    padding: 0.35rem 0;
+  }
+  .criteria-table tbody tr:last-child {
+    border-bottom: 0;
+  }
+  .criteria-table th,
+  .criteria-table td {
+    border-bottom: 0;
+    padding: 0.35rem 0.85rem;
+  }
+  .criteria-table tbody th {
+    padding-top: 0.7rem;
+  }
+  .criteria-table td::before {
+    content: attr(data-label);
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--royal-deep);
+    margin-bottom: 0.2rem;
   }
 }

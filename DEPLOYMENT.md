@@ -4,11 +4,11 @@
 **Build output:** `dist/` (static HTML/CSS/JS + assets). **No secrets, no environment
 variables and no server code are required to serve the site.**
 
-> Status (2026-11-09, updated after PR #1 merge): **deployed to GitHub Pages over HTTP**
-> from `main` (founder confirmed the page renders; "Your site is live" in Pages). DNS is
-> correct at the source. **HTTPS is not yet valid** — certificate pending; see §0.1 for the
-> exact remaining founder actions. Do not claim HTTPS/padlock until a fetch of
-> `https://commercial.obsidixz.pp.ua/` returns 200 with a valid certificate.
+> Status (2026-11-10): **deployed to GitHub Pages from `main`; HTTPS independently
+> confirmed working by the founder on 10 November 2026.** This session did not
+> re-verify the live domain; the founder's confirmation is the record. A full live
+> HTTPS verification pass (routes, assets, canonicals) is still outstanding — see
+> PROJECT_STATUS.md. §0.1 is kept for the record of how HTTPS was activated.
 
 ## 0. GitHub Pages path (current decision — retained by the founder 2026-11-09)
 
@@ -16,22 +16,14 @@ The build ships `.github/workflows/deploy.yml`. **Deploys happen only from `main
 pushes to `main` and manual "Run workflow" selected on the `main` branch. Pushes and PRs
 from any other branch run the `structural` and `browser` checks but never deploy.
 
-Current state of the Pages site (checked via the Pages API on 2026-11-09):
+Pages state as last checked via the Pages API (2026-11-09): source `build_type:
+workflow`, branch `main`; custom domain `commercial.obsidixz.pp.ua` saved and verified;
+certificate `state: "new"`, `https_enforced: false` — **this reading is superseded by
+the founder's 2026-11-10 confirmation that HTTPS is independently confirmed working.**
+The InvalidDNSError banner was a stale-cache artefact at the time (see §0.1 and
+DECISION_LOG.md 31–32); DNS at the source was correct.
 
-- Source: `build_type: workflow` · `source.branch: main`
-- Custom domain: `commercial.obsidixz.pp.ua` (saved and retained)
-- Domain protection/verification: `protected_domain_state: "verified"` (apex
-  `_github-pages-challenge-…` TXT already verifies the account — keep it)
-- Certificate: `https_certificate.state: "new"` (issuing) · `https_enforced: false`
-- HTTPS for the domain is **not yet working** — this is the only failing piece.
-- The "DNS check unsuccessful (InvalidDNSError)" banner is caused by **stale resolver
-  caches holding the pre-fix record** (`richard-olasehinde.github.io.obsidixz.pp.ua.`,
-  a relative expansion of a once-incomplete entry); the record at the source is correct
-  (trailing dot present — confirmed in the nic.ua panel and by repeated resolver reads).
-  A sampled shard still showed ~6 750 s TTL. This is self-healing; GitHub's own re-check
-  can pass before every cache expires.
-
-### 0.1 Finishing HTTPS (founder; ~2 minutes plus issuance wait)
+### 0.1 Finishing HTTPS (founder; completed 2026-11-10 per founder confirmation)
 
 1. Wait until the stale answers expire (the sampled shard pointed at ~2026-11-09 15:30 UTC;
    worst case 4 h from whenever the bad entry was cached) — or simply try now; the check is
