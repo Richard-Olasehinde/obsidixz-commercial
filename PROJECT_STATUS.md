@@ -1,58 +1,62 @@
 # PROJECT STATUS — Obsidixz Commercial
 
-**Date:** 2026-11-10 · **Branch:** `arena/7c77ed96-obsidixz-commercial` (PR open, not merged) · **Repo:** `Richard-Olasehinde/obsidixz-commercial`
-**Date context:** all dates 2026-11-10 UTC unless stated otherwise.
+**Date:** 2026-11-10 · **Branch:** `arena/00a776ed-obsidixz-commercial` (PR open, not merged) · **Repo:** `Richard-Olasehinde/obsidixz-commercial`
+**Date context:** all dates 2026-11-10 UTC.
 
-## Revision under review
+## Revision under review — final cleanup pass
 
-Buyer-journey redesign of the homepage (see `DECISION_LOG.md` 33–37): the page is
-organised around the buyer's four questions, in order — sourcing question → Supplier
-Discovery scope/boundaries → the report (tangible, labelled *Illustrative report
-structure*) → the discussion-to-report process. The packaging section is structured rows
-with per-category research detail; the notebook/workbench photograph was removed from
-the homepage (retained on /industries). CTAs site-wide now read "Discuss your research
-needs" (discussion, not purchase). Approved scope, palette, Montserrat/Open Sans, logo
-lockup, enquiry subject, mailto literal, copy-button behaviour and routes are unchanged.
+Tightly scoped polish over the merged redesign (PR #3, `5116058`). Preserves the design,
+packaging hero, logo lockup, palette, typography, homepage structure and report
+presentation. Changes (see `DECISION_LOG.md` 38):
+
+- Homepage copy consolidated: defensive/ceremony phrasing removed; limitations retained
+  once each; scope summary kept once with Services/Terms links.
+- Contact page: "emerging service operated by an individual", "24/7 desk", "read and
+  considered on its merits" and delivery/receipt commentary removed; invitation and
+  email instructions consolidated per the brief. No response-time promise introduced.
+- Illustrative extract caption now renders full-width with natural wrapping at 320/390 px
+  (stacked layout) and desktop; `.criteria-table-wrap` got `scroll-margin-top: 8rem`.
+- Copy behaviour re-verified (see status 1); no defects found — no behaviour changes.
+
+Live site currently serves `5116058` (the redesign). **This cleanup is not deployed.**
 
 ## Stage results
 
 | Stage | Status | Evidence |
 |---|---|---|
 | 1. Foundation | **PASS** | Astro 7.3.8, 8 routes + 404, authentic assets, self-hosted fonts (unchanged) |
-| 2. Homepage redesign | **PASS** | Served production build inspected at 1440/390; screenshots in `verification/screenshots/` (after) vs `verification/baseline/` (genuine before, same build at `ae0f6cf`) |
-| 3. Interior pages | **PASS** | CTA wording only; routes build and render; Services/How/Industries/About/Contact/Privacy/Terms copy unchanged in substance |
-| 4. Navigation & contact | **PASS** | Menu isolation/Escape/focus-return; copy success + denial + legacy fallback; no-JS static nav; re-verified this revision |
-| 5. Responsive/a11y polish | **PASS** | 5 widths × 10 routes (incl. expected-404) — no overflow, no console errors, no failed requests, no broken visible images; criteria table stacks on <48rem with labelled cells; 200% root font-size clean |
-| 6. Discoverability | **PASS** | Unique titles/descriptions (home description rewritten for the redesign; contact title updated), canonicals, OG/Twitter, favicon set, sitemap (unchanged) |
-| 7. Rendered verification | **PASS** | Served production build under headless Chromium: `check` 53/53, `interact` 5/5, `nojs` 2/2, `verify` all-pass, `astro check` 0 errors (5 pre-existing hints) |
-| 8. Delivery | **PARTIAL** | HTTPS **independently confirmed working by the founder (2026-11-10)**. Formal live-verification pass on all routes over HTTPS not yet run. Feature branch never deploys; `main` alone deploys after founder merge authorisation |
+| 2. Final-cleanup copy | **PASS** | Homepage + contact rebuilt and inspected at 1440/768/390/320 px; before/after in `verification/baseline-cleanup/` vs `verification/screenshots/` |
+| 3. Interior pages | **PASS** | Copy untouched except contact; routes build and render |
+| 4. Contact behaviour | **PASS** | Clipboard success asserts actual clipboard contents; denial reports failure truthfully; legacy fallback passes; exact subject + mailto literal unchanged; no-JS path intact |
+| 5. Responsive/a11y polish | **PASS** | 5 widths × 10 routes (incl. expected-404) — no overflow, no console errors, no failed requests, no broken visible images; caption verified 320/390/1440; 200% root font-size clean |
+| 6. Discoverability | **PASS** | Titles/descriptions/canonicals/OG/sitemap unchanged (no metadata drift) |
+| 7. Rendered verification | **PASS** | Served production build under headless Chromium: `check` 53/53, `interact` 5/5 (incl. clipboard assertions), `nojs` 2/2, `verify` all-pass, `astro check` 0 errors (5 pre-existing hints) |
+| 8. Delivery | **LIVE (redesign) / NOT DEPLOYED (cleanup)** | Redesign deployed from `main` via PR #3 merge; HTTPS independently confirmed working by the founder (2026-11-10). This cleanup reaches `main` only after founder review and merge authorisation |
 
 ## Required delivery statuses
 
-1. **Code implementation & tests run — DONE.** `npm run build` ✓, `npm run check`
-   (0 errors) ✓, `npm run verify` ✓, rendered sweep 53/53 ✓, interaction suite ✓,
-   no-JS suite ✓, 200% root font-size pass ✓, screenshots refreshed ✓. Not run:
-   Lighthouse/axe (not available in this environment).
+1. **Code implementation & tests run — DONE.** Build ✓, `astro check` 0 errors ✓,
+   `npm run verify` ✓, rendered sweep 53/53 ✓, interaction suite (clipboard success with
+   content assertion, denial, legacy fallback, menu isolation/Escape/focus-return) ✓,
+   no-JS ✓, 200% root font-size ✓, screenshots refreshed (incl. new 320/390 caption
+   shots) ✓. Not run: Lighthouse/axe (not available in this environment).
 2. **Visual acceptance — PASS, founder review pending.** Evidence:
-   `verification/screenshots/` (after, this revision) vs `verification/baseline/`
-   (before, same build at `ae0f6cf`): desktop full page, mobile full page, hero/header,
-   packaging rows, report exhibit (desktop + mobile), services, how-it-works, contact
-   (1440/390), expanded mobile menu. No founder approval has been given or implied.
-3. **Deployment & domain verification — HTTPS CONFIRMED WORKING (founder-confirmed
-   2026-11-10).** The founder reports the HTTPS destination independently confirmed
-   working on 10 November 2026. This session did not re-verify the live domain; the
-   record is the founder's report. A full live HTTPS pass (routes, assets, canonicals,
-   headers) remains worthwhile after merge and is recorded as outstanding here until run.
-   The redesign itself is **not deployed**: pushes from this branch run CI but never
-   deploy; `main` deploys only after the founder merges.
+   `verification/screenshots/` (after) vs `verification/baseline-cleanup/` (before, build
+   at `5116058`): homepage full page (desktop/mobile), illustrative extract caption (320/
+   390/1440), contact panels (email instructions + invitation). No founder approval has
+   been given or implied.
+3. **Deployment & domain verification — LIVE.** The redesign is served from `main`
+   (`5116058`); HTTPS **independently confirmed working by the founder 2026-11-10**.
+   A live HTTPS verification pass on all routes remains worthwhile after this cleanup
+   merges; record results here. This cleanup's merge path: founder merge → `main`
+   workflow deploys → live verification.
 4. **Commercial email receipt/reply — NOT DONE.** A real message to and reply from
    `obsidixz.commercial@outlook.com` has not been evidenced. Do not cite mailto as proof.
 
 ## Outstanding items (owner)
 
-- Founder: review the PR preview (before/after screenshots in the PR), then merge or
-  request changes. Merge = the only publish path (`main`-gated workflow).
+- Founder: review the cleanup PR (screenshots embedded) and merge or request changes.
 - Founder/tester: send a real enquiry; record receipt and reply here.
-- Founder: run or authorise the live HTTPS verification pass post-merge (routes, sitemap,
-  sitemap-index.xml, robots.txt, canonicals) and record results here.
-- Founder: visual/brand sign-off on the redesigned homepage.
+- Founder (or any session post-merge): live HTTPS verification pass (routes, sitemap,
+  canonicals) and record results here.
+- Founder: visual/brand sign-off.

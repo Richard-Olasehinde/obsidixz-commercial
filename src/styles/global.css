@@ -1527,6 +1527,7 @@ a {
 }
 
 .criteria-table-wrap {
+  scroll-margin-top: 8rem;
   overflow-x: auto;
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -1541,7 +1542,10 @@ a {
 }
 
 .criteria-table caption {
+  caption-side: top;
   text-align: left;
+  width: 100%;
+  box-sizing: border-box;
   padding: 0.55rem 0.85rem;
   font-size: 0.72rem;
   color: var(--ink);
@@ -1609,7 +1613,7 @@ a {
   border-color: #d8d4cc;
 }
 
-/* Q3 — honesty notes (below the exhibit) */
+/* Q3 — notes below the exhibit */
 .report-notes {
   display: grid;
   gap: 0.5rem;
@@ -1663,6 +1667,13 @@ a {
     min-width: 0;
     display: block;
     font-size: 0.85rem;
+  }
+  .criteria-table caption {
+    display: block;
+    width: 100%;
+    overflow-wrap: break-word;
+    white-space: normal;
+    padding: 0.65rem 0.85rem;
   }
   .criteria-table thead {
     position: absolute;

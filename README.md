@@ -66,7 +66,7 @@ sandbox NSPR/NSS procedure.
 - 200% root font-size pass (text-size simulation, not browser zoom) ✓
 - Interaction suite (menu isolation/focus return, copy success/denial/fallback) ✓ · no-JS suite ✓
 - Browser screenshots in `verification/screenshots/` (identified in `PROJECT_STATUS.md`);
-  genuine before-renders for the homepage redesign live in `verification/baseline/`
+  before-renders live in `verification/baseline/` (redesign) and `verification/baseline-cleanup/` (final cleanup)
 
 ## Licence & use
 

@@ -349,16 +349,16 @@ if (mode === 'nojs' || mode === 'all') {
 /* ---------------------------------- shots ---------------------------------- */
 if (mode === 'shots' || mode === 'all') {
   mkdirSync(SHOTS, { recursive: true });
-  const shot = async (route, width, height, name, { fullPage = false, scroll = false, target = null } = {}) => {
+  const shot = async (route, width, height, name, { fullPage = false, scroll = false, target = null, block = 'center' } = {}) => {
     const page = await newPage(width, height);
     await page.goto(BASE + route, { waitUntil: 'networkidle0', timeout: 45000 });
     await settleLazy(page); // lazy images must be fetched before capture
     if (target) {
       const el = await page.$(target);
       if (el) {
-        await page.evaluate((target) => {
-          document.querySelector(target)?.scrollIntoView({ behavior: 'instant', block: 'center' });
-        }, target);
+        await page.evaluate((target, block) => {
+          document.querySelector(target)?.scrollIntoView({ behavior: 'instant', block });
+        }, target, block);
         await new Promise((r) => setTimeout(r, 350));
       } else {
         console.log(`WARN target ${target} not found on ${route}`);
@@ -375,6 +375,8 @@ if (mode === 'shots' || mode === 'all') {
   await shot('/', 1440, 900, 'home-desktop-full-1440.png', { fullPage: true, scroll: true });
   await shot('/', 1440, 900, 'home-packaging-rows-1440x900.png', { target: '#packaging-heading' });
   await shot('/', 1440, 900, 'home-report-exhibit-1440x900.png', { target: '#report-heading' });
+  await shot('/', 320, 700, 'home-report-caption-320x700.png', { target: '.criteria-table-wrap', block: 'start' });
+  await shot('/', 390, 844, 'home-report-caption-390x844.png', { target: '.criteria-table-wrap', block: 'start' });
   await shot('/', 390, 844, 'home-mobile-390x844.png', { fullPage: true, scroll: true });
   await shot('/services', 1440, 900, 'services-desktop-1440x900.png');
   await shot('/how-it-works', 1440, 900, 'how-it-works-desktop-1440x900.png');

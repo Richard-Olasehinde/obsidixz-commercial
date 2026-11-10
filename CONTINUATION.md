@@ -4,19 +4,18 @@ _Pick-up guide. Read this first if the session is lost._
 
 ## State in one line
 
-Buyer-journey homepage redesign (question → Supplier Discovery scope → tangible
-illustrative report → discussion-to-report process; CTAs site-wide read "Discuss your
-research needs") on branch `arena/7c77ed96-obsidixz-commercial`, open as a PR against
-`main`. **Not merged, not deployed — the preview the founder reviews is this branch's
-served production build (or the CI `dist` artifact); `main` alone deploys.** HTTPS was
-independently confirmed working by the founder on 2026-11-10 (record is the founder's
-report, not a sandbox re-verification). Commercial email receipt/reply remains
-unevidenced. Visual/brand sign-off pending.
+Final cleanup pass on top of the merged redesign (PR #3 merged as `5116058`; live site
+serves it; HTTPS independently confirmed working by the founder 2026-11-10). Branch
+`arena/00a776ed-obsidixz-commercial` carries the cleanup PR against `main`: homepage/contact
+copy consolidation, illustrative-extract caption fix (full-width, natural wrap at
+320/390px) and copy-behaviour re-verification. **Not merged, not deployed — `main` alone
+deploys after founder review and merge authorisation.** Commercial email receipt/reply
+remains unevidenced. Visual/brand sign-off pending.
 
 ## Repo & branch
 
 - Remote: `https://github.com/Richard-Olasehinde/obsidixz-commercial.git`
-- Working branch: `arena/7c77ed96-obsidixz-commercial` (do not rename; Arena tracks sessions by branch)
+- Working branch: `arena/00a776ed-obsidixz-commercial` (do not rename; Arena tracks sessions by branch)
 - Reproduce locally:
 
 ```bash
@@ -35,10 +34,10 @@ npm run preview
 | `npm run build` | Astro static build → `dist/` (9 pages) | PASS |
 | `npm run check` | `@astrojs/check` type/content | PASS, 0 errors (5 pre-existing hints) |
 | `npm run verify` | Parse-based checks on `dist/` | PASS |
-| `npm run test:render` | served `dist/`: 5 widths × 10 routes + 200% root font-size | PASS (53/53) |
+| | `npm run test:render` | served `dist/`: 5 widths × 10 routes + 200% root font-size | PASS (53/53) |
 | `node scripts/rendered-checks.mjs interact` | menu open/Escape/focus-return/isolation/resize; copy success + denial + legacy fallback | PASS (5/5) |
 | `node scripts/rendered-checks.mjs nojs` | JS disabled: static nav, exact mailto, no dialog semantics | PASS (2/2) |
-| `node scripts/rendered-checks.mjs shots` | screenshot set → `verification/screenshots/` (incl. new `home-packaging-rows`, `home-report-exhibit`; `home-lower-editorial` renamed) | captured |
+| `node scripts/rendered-checks.mjs shots` | screenshot set → `verification/screenshots/` (incl. `home-packaging-rows`, `home-report-exhibit`, `home-report-caption-320x700`, `home-report-caption-390x844`) | captured |
 
 Browser checks need the preview running (`npm run preview`, or `npx astro preview
 --port 4321`), or set `BASE_URL`. All browser-test dependencies are declared
@@ -79,11 +78,12 @@ report stale results — rebuild (`npm run build`) before trusting any served-pa
 
 ## Evidence
 
-`verification/screenshots/` — refreshed this revision (desktop hero/header, full desktop
-page, packaging rows, report exhibit, mobile full page, menu, services, how-it-works,
-contact). `verification/baseline/` — genuine before-renders captured from the served
-build at `ae0f6cf` before any edits (desktop hero/header, full desktop, mobile full page,
-lower-editorial section, report-panel close-up).
+`verification/screenshots/` — refreshed this revision (hero/header, full desktop page,
+packaging rows, report exhibit, illustrative-extract caption at 320/390 px, contact
+panels, mobile full page, menu, services, how-it-works, contact).
+`verification/baseline/` — before-renders for the homepage redesign (build at `ae0f6cf`).
+`verification/baseline-cleanup/` — before-renders for this cleanup (build at `5116058`):
+caption at 320/390/1440, contact panels, homepage full page (desktop/mobile).
 
 ## Recovery instructions
 
@@ -99,8 +99,8 @@ lower-editorial section, report-panel close-up).
 
 ## Remaining work, in order
 
-1. Founder: review the PR (screenshots before/after inside it); request changes or
-   authorise merge. Merge is the only publish path (deploy gated to `main`).
+1. Founder: review the cleanup PR (screenshots before/after inside it); request changes
+   or authorise merge. Merge is the only publish path (deploy gated to `main`).
 2. Founder/tester: send a real enquiry to `obsidixz.commercial@outlook.com`; confirm
    receipt and a reply from that account; record both in `PROJECT_STATUS.md`.
 3. Founder or any session post-merge: run the live HTTPS verification pass (all 8 routes
