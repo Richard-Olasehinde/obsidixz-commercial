@@ -69,18 +69,30 @@
    │  ├─ home-desktop-full-1440.png
    │  ├─ home-packaging-rows-1440x900.png   # replaces home-lower-editorial (renamed)
    │  ├─ home-report-exhibit-1440x900.png
+   │  ├─ home-report-caption-320x700.png
+   │  ├─ home-report-caption-390x844.png
    │  ├─ home-mobile-390x844.png
    │  ├─ mobile-menu-expanded-390x844.png
    │  ├─ services-desktop-1440x900.png
    │  ├─ how-it-works-desktop-1440x900.png
    │  ├─ contact-desktop-1440x900.png
-   │  └─ contact-mobile-390x844.png
-   └─ baseline/                # genuine before-renders (build at ae0f6cf, captured pre-edit)
-      ├─ home-desktop-header-hero-1440x900.png
-      ├─ home-desktop-full-1440.png
-      ├─ home-lower-editorial-1440x900.png
-      ├─ home-mobile-390x844.png
-      ├─ home-report-before-1440x900.png
+   │  ├─ contact-mobile-390x844.png
+   │  ├─ contact-email-panel-after-1440x900.png
+   │  └─ contact-questions-panel-after-1440x900.png
+   ├─ baseline/                # redesign before-renders (build at ae0f6cf, captured pre-edit)
+   │  ├─ home-desktop-header-hero-1440x900.png
+   │  ├─ home-desktop-full-1440.png
+   │  ├─ home-lower-editorial-1440x900.png
+   │  ├─ home-mobile-390x844.png
+   │  └─ home-report-before-1440x900.png
+   └─ baseline-cleanup/        # cleanup before-renders (build at 5116058, pre-edit)
+      ├─ home-report-caption-before-320x700.png
+      ├─ home-report-caption-before-390x844.png
+      ├─ home-report-caption-before-1440x900.png
+      ├─ contact-email-panel-before-1440x900.png
+      ├─ contact-questions-panel-before-1440x900.png
+      ├─ home-desktop-full-before.png
+      └─ home-mobile-full-before.png
 ```
 
 ## Rendered output (dist/)

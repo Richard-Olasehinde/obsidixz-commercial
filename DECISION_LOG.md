@@ -205,3 +205,33 @@ All decisions 2026-11-09 unless dated.
     (no overflow/console errors/failed requests/broken images), interaction suite
     (menu isolation/Escape/focus-return, clipboard success/denial/legacy fallback),
     no-JS suite — all PASS; Lighthouse/axe still not run (not available here).
+
+38. **Final cleanup pass (2026-11-10, fifth pass) — defensive copy consolidated; contact
+    invitation simplified; illustrative caption fixed; copy behaviour verified.** Homepage:
+    "Some briefs support a shortlist; some support none, and we will say so rather than
+    invent one" → "The report may identify potential suppliers or conclude that available
+    information does not support a shortlist."; "the first reply is scoping, not selling"
+    → "we start by clarifying your research needs."; "It is deliberately narrow — and the
+    boundaries are part of the offer, not fine print" → a direct fixed-fee explanation of
+    the research and report; "not a dashboard you have to interpret" → a positive sourced
+    document description; "not for consumers hunting retail bargains" removed — the
+    audience is described positively and the due-diligence caveat is kept; "an honest
+    feasibility view" → "a feasibility view"; the search-engine aside in the packaging
+    lede removed. One concise scope summary and the Services/Terms links remain; material
+    limitations remain once each (scope panels, report notes, process note). Contact page:
+    "an emerging service operated by an individual", "24/7 desk", and "read and considered
+    on its merits" removed → "Questions about scope, quotations, industries or the
+    research process are welcome. Email us to discuss what you need."; the two email
+    preamble paragraphs consolidated to one; delivery/receipt commentary removed; no
+    response-time promise introduced; mailto literal, visible selectable address, email
+    action, manual fallback and privacy link unchanged. Illustrative extract caption now
+    renders full-width in the stacked (<48rem) layout (display:block; width:100%) and in
+    the desktop bar (width:100%; caption-side:top); `.criteria-table-wrap` carries
+    scroll-margin-top:8rem so scroll/fragment targeting lands it below the sticky header;
+    verified at 320/390/1440 px with no horizontal overflow. Rendered-checks extended
+    with 320px and 390px caption shots and a `block` option for the screenshot helper —
+    nothing weakened; verify.mjs assertions unchanged. Copy behaviour itself was
+    re-verified rather than rewritten: the clipboard success path asserts the clipboard
+    actually contains `obsidixz.commercial@outlook.com`, the denial path reports failure
+    truthfully (isError), and the legacy fallback passes — no defects found, no
+    behaviour changes made.
